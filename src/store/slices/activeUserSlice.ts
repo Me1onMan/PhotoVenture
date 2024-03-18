@@ -25,7 +25,7 @@ const activeUserSlice = createSlice({
   name: 'activeUser',
   initialState,
   reducers: {
-    removeUser(state) {
+    removeActiveUser(state) {
       state.entity = undefined;
     },
   },
@@ -36,5 +36,5 @@ const activeUserSlice = createSlice({
   },
 });
 
-export const { removeUser } = activeUserSlice.actions;
+export const { removeActiveUser } = activeUserSlice.actions;
 export default activeUserSlice.reducer;

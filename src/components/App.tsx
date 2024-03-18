@@ -1,13 +1,7 @@
-import LoginForm from './LoginForm';
-import RegisterForm from './RegisterFrom';
+import AppRouter from './AppRouter';
 
 const App = () => {
-  return (
-    <div>
-      <RegisterForm />
-      <LoginForm />
-    </div>
-  );
+  return <AppRouter />;
 };
 
 export default App;

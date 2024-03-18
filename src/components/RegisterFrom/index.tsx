@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import register from '@/firebase/actions/register';
+import { LOGIN_PAGE_ROUTE } from '@/router/routes';
 
 // import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../UI/Button';
@@ -27,28 +29,31 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <h1>Registration!</h1>
-      <Input value={login} setValue={setLogin} name="login" placeholder="Login" type="text" />
-      <Input value={email} setValue={setEmail} name="email" placeholder="Email" type="email" />
-      <Input
-        value={telegramLink}
-        setValue={setTelegramLink}
-        name="telegramLink"
-        placeholder="Telegram link"
-        type="text"
-      />
-      <Input
-        value={password}
-        setValue={setPassword}
-        name="password"
-        placeholder="Password"
-        type="password"
-      />
-      <Button type="button" onClick={handleSubmit}>
-        Register
-      </Button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <Input value={login} setValue={setLogin} name="login" placeholder="Login" type="text" />
+        <Input value={email} setValue={setEmail} name="email" placeholder="Email" type="email" />
+        <Input
+          value={telegramLink}
+          setValue={setTelegramLink}
+          name="telegramLink"
+          placeholder="Telegram link"
+          type="text"
+        />
+        <Input
+          value={password}
+          setValue={setPassword}
+          name="password"
+          placeholder="Password"
+          type="password"
+        />
+        <Button type="button" onClick={handleSubmit}>
+          Register
+        </Button>
+      </form>
+      <NavLink to={LOGIN_PAGE_ROUTE}>To login page</NavLink>
+    </>
   );
 };
 

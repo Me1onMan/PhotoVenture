@@ -1,5 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 import FIREBASE_CONFIG from './config';
@@ -15,3 +20,7 @@ export const signIn = (email: string, password: string) =>
 
 export const createUser = (email: string, password: string) =>
   createUserWithEmailAndPassword(auth, email, password);
+
+export const logout = () => {
+  signOut(auth);
+};

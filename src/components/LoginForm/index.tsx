@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
 
+import { HOME_PAGE_ROUTE, REGISTRATION_PAGE_ROUTE } from '@/router/routes';
 import { AppDispatch } from '@/store';
-import { fetchUserByLogin, removeUser } from '@/store/slices/activeUserSlice';
+import { fetchUserByLogin } from '@/store/slices/activeUserSlice';
 
 // import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../UI/Button';
@@ -20,37 +22,34 @@ const LoginForm = () => {
 
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   // const onSubmit: SubmitHandler<TFormInput> = () => {};
   const handleSubmit = async () => {
-    // const userData = await getUserIdAndLogin(login, password);
-    // console.log(userData);
     dispatch(fetchUserByLogin({ login, password }));
-  };
-
-  const handleLogout = () => {
-    dispatch(removeUser());
+    navigate(HOME_PAGE_ROUTE);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <h1>Login!</h1>
-      <Input value={login} setValue={setLogin} name="login" placeholder="Login" type="text" />
-      <Input
-        value={password}
-        setValue={setPassword}
-        name="password"
-        placeholder="Password"
-        type="password"
-      />
-      <Button type="button" onClick={handleSubmit}>
-        Login
-      </Button>
-      <Button type="button" onClick={handleLogout}>
-        Logout
-      </Button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <Input value={login} setValue={setLogin} name="login" placeholder="Login" type="text" />
+        <Input
+          value={password}
+          setValue={setPassword}
+          name="password"
+          placeholder="Password"
+          type="password"
+        />
+        <Button type="button" onClick={handleSubmit}>
+          Login
+        </Button>
+      </form>
+      <NavLink to={REGISTRATION_PAGE_ROUTE}>To registration page</NavLink>
+    </>
   );
 };
 
