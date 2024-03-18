@@ -9,6 +9,8 @@ export type TUser = {
   password: string;
 };
 
+export type TUserWOPassword = Omit<TUser, 'password'>;
+
 export type TEmotions = 'happiness' | 'sadness' | 'love' | 'hate' | 'joy' | 'surprise';
 export type TPostTypes = 'nature' | 'architecture' | 'occasion' | 'event' | 'item';
 

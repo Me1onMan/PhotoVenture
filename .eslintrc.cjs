@@ -64,5 +64,11 @@ module.exports = {
         "no-new": "off",
       },
     },
+    {
+      files: ["./src/store/slices/*"],
+      rules: {
+        "no-param-reassign": "off",
+      },
+    },
   ],
 };

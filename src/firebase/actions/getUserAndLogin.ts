@@ -1,16 +1,14 @@
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
-import { TUser } from '@/types';
+import { TUserWOPassword } from '@/types';
 
 import { USERS_COLLECTION } from '../collections';
 import { database, signIn } from '..';
 
-type TUserWOPassword = Omit<TUser, 'password'>;
-
 const LOGIN = 'login';
 // const EMAIL = 'email';
 
-const getUserIdAndLogin = async (login: string, password: string) => {
+const getUserAndLogin = async (login: string, password: string) => {
   const userCollection = collection(database, USERS_COLLECTION);
   const userQuery = query(userCollection, where(LOGIN, '==', login));
 
@@ -33,4 +31,4 @@ const getUserIdAndLogin = async (login: string, password: string) => {
   return user;
 };
 
-export default getUserIdAndLogin;
+export default getUserAndLogin;
