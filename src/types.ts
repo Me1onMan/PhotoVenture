@@ -44,3 +44,7 @@ export type TGroup = {
   membersId: Array<string>;
   ownerId: string;
 };
+
+export type TIsAuth = {
+  isAuth: boolean;
+};

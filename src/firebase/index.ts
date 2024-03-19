@@ -13,7 +13,7 @@ const app = initializeApp(FIREBASE_CONFIG);
 
 export const database = getFirestore(app);
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 export const signIn = (email: string, password: string) =>
   signInWithEmailAndPassword(auth, email, password);
