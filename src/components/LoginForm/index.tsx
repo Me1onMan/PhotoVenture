@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 
@@ -27,7 +27,9 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   // const onSubmit: SubmitHandler<TFormInput> = () => {};
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     dispatch(fetchUserByLogin({ login, password }));
     navigate(HOME_PAGE_ROUTE);
   };
@@ -44,9 +46,7 @@ const LoginForm = () => {
           placeholder="Password"
           type="password"
         />
-        <Button type="button" onClick={handleSubmit}>
-          Login
-        </Button>
+        <Button type="submit">Login</Button>
       </form>
       <NavLink to={REGISTRATION_PAGE_ROUTE}>To registration page</NavLink>
     </>

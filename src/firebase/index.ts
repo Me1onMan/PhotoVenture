@@ -24,6 +24,6 @@ export const signIn = (email: string, password: string) =>
 export const createUser = (email: string, password: string) =>
   createUserWithEmailAndPassword(auth, email, password);
 
-export const logout = () => {
-  signOut(auth);
+export const logout = async () => {
+  await signOut(auth);
 };

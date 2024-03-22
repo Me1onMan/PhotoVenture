@@ -12,9 +12,9 @@ const HomePage: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await logout();
     dispatch(removeActiveUser());
-    logout();
     navigate(LOGIN_PAGE_ROUTE, { replace: true });
   };
 
