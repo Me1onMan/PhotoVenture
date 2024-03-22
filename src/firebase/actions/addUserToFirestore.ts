@@ -1,13 +1,11 @@
 import { addDoc, collection } from 'firebase/firestore';
 
-import { TUser } from '@/types';
+import { TUserRegistraton } from '@/types';
 
 import { USERS_COLLECTION } from '../collections';
 import { database } from '..';
 
-type TUserDB = Pick<TUser, 'login' | 'email' | 'telegramLink'>;
-
-const addUserToFirestore = async ({ login, email, telegramLink }: TUserDB) => {
+const addUserToFirestore = async ({ login, email, telegramLink }: TUserRegistraton) => {
   try {
     addDoc(collection(database, USERS_COLLECTION), {
       login,

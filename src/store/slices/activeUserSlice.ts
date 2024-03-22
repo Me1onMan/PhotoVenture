@@ -36,5 +36,7 @@ const activeUserSlice = createSlice({
   },
 });
 
+export const selectActiveUser = (state: { activeUser: { entity: TUserWOPassword } }) =>
+  state.activeUser.entity;
 export const { removeActiveUser } = activeUserSlice.actions;
 export default activeUserSlice.reducer;

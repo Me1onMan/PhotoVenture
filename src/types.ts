@@ -10,9 +10,11 @@ export type TUser = {
 };
 
 export type TUserWOPassword = Omit<TUser, 'password'>;
+export type TUserRegistraton = Omit<TUser, 'id' | 'token'>;
 
-export type TEmotions = 'happiness' | 'sadness' | 'love' | 'hate' | 'joy' | 'surprise';
-export type TPostTypes = 'nature' | 'architecture' | 'occasion' | 'event' | 'item';
+export type TEmotions = 'happiness' | 'sadness' | 'love' | 'hate' | 'joy' | 'surprise' | '';
+
+export type TPostTypes = 'nature' | 'architecture' | 'occasion' | 'event' | 'item' | '';
 
 export type TPost = {
   id: string;
@@ -20,13 +22,17 @@ export type TPost = {
   description: string;
   photoLinks: Array<string>;
   emotion: TEmotions;
-  type: TPostTypes;
+  postType: TPostTypes;
   advices: string;
-  access: Array<'public' | 'private' | string>;
+  access: 'public' | 'private' | string;
   authorId: string;
-  createdAt: Timestamp;
   geoCoordinates: [number, number];
+  createdAt: Timestamp;
   commentsId: Array<string>;
+};
+
+export type TPostCreate = Omit<TPost, 'id' | 'createdAt' | 'commentsId' | 'photoLinks'> & {
+  files: Array<TFile>;
 };
 
 export type TComment = {
@@ -48,3 +54,15 @@ export type TGroup = {
 export type TIsAuth = {
   isAuth: boolean;
 };
+
+export type TFile =
+  | (Blob & {
+      name: string;
+    })
+  | (Uint8Array & {
+      name: string;
+    })
+  | (ArrayBuffer & {
+      name: string;
+    })
+  | null;

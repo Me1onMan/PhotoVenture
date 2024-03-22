@@ -9,7 +9,7 @@ const Input: FC<TInputProps> = ({
   name,
   placeholder = '',
   type = 'text',
-  pattern = '',
+  pattern = '.*',
 }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);

@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export type TInputProps = {
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+  value: string | number;
+  setValue: Dispatch<SetStateAction<string | number>>;
   name: string;
-  placeholder?: string;
-  type?: 'text' | 'password' | 'email';
+  placeholder: string;
+  type?: 'text' | 'password' | 'email' | 'number';
   pattern?: string;
 };
