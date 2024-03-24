@@ -40,7 +40,7 @@ const addPostToFirestore = async ({
     await addDoc(collection(database, POSTS_COLLECTION), {
       title,
       description,
-      imageLinks,
+      photoLinks: imageLinks,
       emotion,
       postType,
       advices,
