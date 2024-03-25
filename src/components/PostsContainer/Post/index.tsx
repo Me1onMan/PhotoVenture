@@ -34,8 +34,6 @@ const Post: FC<TPostProps> = ({ id, postData }) => {
 
   const photos = usePhotosFromFirestore(photoLinks);
 
-  console.log(commentsId);
-
   return (
     <PostContainer>
       <Title>{title}</Title>
@@ -49,6 +47,7 @@ const Post: FC<TPostProps> = ({ id, postData }) => {
       <GeoCoordinates>{geoCoordinates}</GeoCoordinates>
       <CreatedAt>{creationDate}</CreatedAt>
       <Author>{authorId}</Author>
+      <p>Comments id: {commentsId}</p>
     </PostContainer>
   );
 };

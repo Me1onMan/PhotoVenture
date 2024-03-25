@@ -14,8 +14,7 @@ const PostsContainer: FC = () => {
     const loadPosts = async () => {
       try {
         setIsLoading(true);
-        const loadedPosts = await getAllPosts();
-        // console.log(loadedPosts);
+        const loadedPosts = await getAllPosts('desc');
 
         setPosts(loadedPosts);
       } catch (error) {
@@ -28,9 +27,6 @@ const PostsContainer: FC = () => {
 
     loadPosts();
   }, []);
-
-  //   console.log(posts);
-  //   console.log(isLoading);
 
   if (isLoading) return <h1>Loading</h1>;
 

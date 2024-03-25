@@ -1,13 +1,14 @@
-import { collection, getDocs, query } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
 import { TPostProps } from '@/components/PostsContainer/Post/types';
+import { TSortOrder } from '@/types';
 
 import { POSTS_COLLECTION } from '../collections';
 import { database } from '..';
 
-const getAllPosts = async () => {
+const getAllPosts = async (timeSortType: TSortOrder) => {
   const postsRef = collection(database, POSTS_COLLECTION);
-  const q = query(postsRef);
+  const q = query(postsRef, orderBy('createdAt', timeSortType));
 
   const postsSnapshot = await getDocs(q);
 

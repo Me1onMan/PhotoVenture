@@ -66,3 +66,5 @@ export type TFile =
       name: string;
     })
   | null;
+
+export type TSortOrder = 'asc' | 'desc';
