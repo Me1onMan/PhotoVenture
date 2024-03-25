@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
-export const PostContainer = styled.div``;
+export const PostContainer = styled.div`
+  padding: 1rem;
+  border-top: 1px solid black;
+`;
 export const Title = styled.h3``;
 export const Description = styled.p``;
 export const Emotion = styled.p``;

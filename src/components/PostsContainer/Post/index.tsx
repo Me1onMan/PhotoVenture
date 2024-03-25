@@ -1,4 +1,7 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { getDownloadURL, ref } from 'firebase/storage';
+
+import { storageImagesRef } from '@/firebase';
 
 import {
   Access,
@@ -29,17 +32,34 @@ const Post: FC<TPostProps> = ({ id, postData }) => {
     createdAt,
     commentsId,
   } = postData;
-
   const creationDate = createdAt.toDate().toString();
+
+  const [photos, setPhotos] = useState<Array<string>>([]);
+
+  useEffect(() => {
+    const getFile = async () => {
+      const filePromises = photoLinks.map(async (photoLink) => {
+        const file = await getDownloadURL(ref(storageImagesRef, photoLink));
+        return file;
+      });
+      //   const file = await getDownloadURL(ref(storageImagesRef, photoLinks[0]));
+      const downloadedFiles = await Promise.all(filePromises);
+      setPhotos(downloadedFiles);
+    };
+
+    getFile();
+  }, [photoLinks]);
   //   console.log(creationDate);
 
-  console.log(id);
-  console.log(photoLinks);
+  //   console.log(id);
+  //   console.log(photoLinks);
   console.log(commentsId);
 
   return (
     <PostContainer>
       <Title>{title}</Title>
+      <p>id: {id}</p>
+      {photos.length && photos.map((photo) => <img key={photo} src={photo} alt="Post file" />)}
       <Description>{description}</Description>
       <Emotion>{emotion}</Emotion>
       <PostType>{postType}</PostType>

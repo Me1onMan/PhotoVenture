@@ -29,8 +29,8 @@ const PostsContainer: FC = () => {
     loadPosts();
   }, []);
 
-  console.log(posts);
-  console.log(isLoading);
+  //   console.log(posts);
+  //   console.log(isLoading);
 
   if (isLoading) return <h1>Loading</h1>;
 
