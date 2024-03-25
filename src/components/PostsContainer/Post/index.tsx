@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import AddCommentForm from '@/components/AddCommentForm';
 import usePhotosFromFirestore from '@/hooks/usePhotosFromFirestore';
 
 import {
@@ -47,6 +48,7 @@ const Post: FC<TPostProps> = ({ id, postData }) => {
       <GeoCoordinates>{geoCoordinates}</GeoCoordinates>
       <CreatedAt>{creationDate}</CreatedAt>
       <Author>{authorId}</Author>
+      <AddCommentForm postId={id} commentsId={commentsId} />
       <p>Comments id: {commentsId}</p>
     </PostContainer>
   );
