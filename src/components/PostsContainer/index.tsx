@@ -18,8 +18,7 @@ const PostsContainer: FC = () => {
 
         setPosts(loadedPosts);
       } catch (error) {
-        console.log(error);
-        throw new Error("Error occured in PostsContainer's useEffect");
+        throw new Error('Error occured in PostsContainer useEffect');
       } finally {
         setIsLoading(false);
       }

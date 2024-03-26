@@ -3,6 +3,7 @@ import { FC } from 'react';
 import AddCommentForm from '@/components/AddCommentForm';
 import usePhotosFromFirestore from '@/hooks/usePhotosFromFirestore';
 
+import Comments from './Comments';
 import {
   Access,
   Advices,
@@ -37,19 +38,19 @@ const Post: FC<TPostProps> = ({ id, postData }) => {
 
   return (
     <PostContainer>
-      <Title>{title}</Title>
       <p>id: {id}</p>
+      <Title>{title}</Title>
       {photos.length > 0 && photos.map((photo) => <img key={photo} src={photo} alt="Post file" />)}
       <Description>{description}</Description>
-      <Emotion>{emotion}</Emotion>
-      <PostType>{postType}</PostType>
-      <Advices>{advices}</Advices>
-      <Access>{access}</Access>
-      <GeoCoordinates>{geoCoordinates}</GeoCoordinates>
-      <CreatedAt>{creationDate}</CreatedAt>
-      <Author>{authorId}</Author>
+      <Emotion>Emotion: {emotion}</Emotion>
+      <PostType>Type: {postType}</PostType>
+      <Advices>Advices: {advices}</Advices>
+      <Access>Access: {access}</Access>
+      <GeoCoordinates>Geo coordinates: {geoCoordinates}</GeoCoordinates>
+      <CreatedAt>Created at: {creationDate}</CreatedAt>
+      <Author>Author id: {authorId}</Author>
       <AddCommentForm postId={id} commentsId={commentsId} />
-      <p>Comments id: {commentsId}</p>
+      <Comments commentsId={commentsId} />
     </PostContainer>
   );
 };

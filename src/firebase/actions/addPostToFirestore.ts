@@ -20,17 +20,12 @@ const addPostToFirestore = async ({
 }: TPostCreate) => {
   try {
     const getImageLinks = async () => {
-      // console.log(files);
-
       const promises = files.map(async (file) => {
         const imageLink = await getFileLinkAndAddFileToFirestore(file, authorId);
         return imageLink;
       });
 
-      // console.log(promises);
-
       const imageLinks = await Promise.all(promises);
-      // console.log(imageLinks);
 
       return imageLinks;
     };
