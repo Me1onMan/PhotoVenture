@@ -27,7 +27,7 @@ const UsersContianer = () => {
     loadUsers();
   }, []);
 
-  if (isLoading) return <h1>Loading users...</h1>;
+  if (isLoading) return <h1>Loading groups...</h1>;
 
   return (
     <UsersStyledContainer>

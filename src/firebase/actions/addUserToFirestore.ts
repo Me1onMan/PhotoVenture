@@ -5,7 +5,11 @@ import { TUserRegistraton } from '@/types';
 import { USERS_COLLECTION } from '../collections';
 import { database } from '..';
 
-const addUserToFirestore = async ({ login, email, telegramLink }: TUserRegistraton) => {
+const addUserToFirestore = async ({
+  login,
+  email,
+  telegramLink,
+}: Omit<TUserRegistraton, 'password'>) => {
   try {
     addDoc(collection(database, USERS_COLLECTION), {
       login,
