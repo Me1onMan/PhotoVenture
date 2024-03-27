@@ -18,7 +18,7 @@ import {
 } from './styled';
 import { TPostProps } from './types';
 
-const Post: FC<TPostProps> = ({ id, postData }) => {
+const Post: FC<TPostProps> = ({ id, data }) => {
   const {
     title,
     description,
@@ -31,7 +31,7 @@ const Post: FC<TPostProps> = ({ id, postData }) => {
     geoCoordinates,
     createdAt,
     commentsId,
-  } = postData;
+  } = data;
   const creationDate = createdAt.toDate().toString();
 
   const photos = usePhotosFromFirestore(photoLinks);
