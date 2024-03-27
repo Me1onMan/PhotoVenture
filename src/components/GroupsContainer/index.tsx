@@ -1,33 +1,10 @@
-import { useEffect, useState } from 'react';
+import useGroups from '@/hooks/useGroups';
 
-import getGroups from '@/firebase/actions/getGroups';
-
-import { TGroupCardProps } from './GroupCard/types';
 import GroupCard from './GroupCard';
 import { GroupsStyledContainer } from './styled';
 
 const GroupsContainer = () => {
-  const [groups, setGroups] = useState<Array<TGroupCardProps>>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const loadGroups = async () => {
-      try {
-        setIsLoading(true);
-        const loadedGroups = await getGroups();
-        setGroups(loadedGroups);
-      } catch (error) {
-        console.log(error);
-        throw new Error('Error occured in GroupsContainer useEffect()');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadGroups();
-  }, []);
-
-  if (isLoading) return <h1>Loading users...</h1>;
+  const groups = useGroups();
 
   return (
     <GroupsStyledContainer>
