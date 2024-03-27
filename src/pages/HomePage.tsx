@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import AddPostForm from '@/components/AddPostForm';
+import Navbar from '@/components/Navbar';
 import PostsContainer from '@/components/PostsContainer';
 import Button from '@/components/UI/Button';
 import { logout } from '@/firebase';
@@ -21,6 +22,7 @@ const HomePage: FC = () => {
 
   return (
     <div>
+      <Navbar />
       <Button onClick={handleLogout}>Logout</Button>
       <AddPostForm />
       <PostsContainer />
