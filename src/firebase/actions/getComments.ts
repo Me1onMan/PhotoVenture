@@ -1,6 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore';
 
-import { TCommentProps } from '@/components/PostsContainer/Post/Comments/Comment/types';
+import { TCommentProps } from '@/components/SinglePost/Comments/Comment/types';
 
 import { COMMENTS_COLLECTION } from '../collections';
 import { database } from '..';

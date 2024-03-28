@@ -12,7 +12,7 @@ const usePhotosFromFirestore = (photoLinks: Array<string>) => {
         const file = await getDownloadURL(ref(storageImagesRef, photoLink));
         return file;
       });
-      //   const file = await getDownloadURL(ref(storageImagesRef, photoLinks[0]));
+
       const downloadedFiles = await Promise.all(filePromises);
       setPhotos(downloadedFiles);
     };

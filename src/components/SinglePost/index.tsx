@@ -2,6 +2,9 @@ import { FC } from 'react';
 
 import usePhotosFromFirestore from '@/hooks/usePhotosFromFirestore';
 
+import AddCommentForm from '../AddCommentForm';
+
+import Comments from './Comments';
 import {
   Access,
   Advices,
@@ -14,9 +17,9 @@ import {
   PostType,
   Title,
 } from './styled';
-import { TPostProps } from './types';
+import { TProps } from './types';
 
-const Post: FC<TPostProps> = ({ id, data }) => {
+const SinglePost: FC<TProps> = ({ id, data }) => {
   const {
     title,
     description,
@@ -25,17 +28,17 @@ const Post: FC<TPostProps> = ({ id, data }) => {
     postType,
     advices,
     access,
-    authorId,
     geoCoordinates,
     createdAt,
+    authorId,
+    commentsId,
   } = data;
-  const creationDate = createdAt.toDate().toString();
 
   const photos = usePhotosFromFirestore(photoLinks);
 
   return (
     <PostContainer>
-      <p>id: {id}</p>
+      <p>postId: {id}</p>
       <Title>{title}</Title>
       {photos.length > 0 && photos.map((photo) => <img key={photo} src={photo} alt="Post file" />)}
       <Description>{description}</Description>
@@ -44,10 +47,12 @@ const Post: FC<TPostProps> = ({ id, data }) => {
       <Advices>Advices: {advices}</Advices>
       <Access>Access: {access}</Access>
       <GeoCoordinates>Geo coordinates: {geoCoordinates}</GeoCoordinates>
-      <CreatedAt>Created at: {creationDate}</CreatedAt>
+      <CreatedAt>Created at: {createdAt.toDate().toString()}</CreatedAt>
       <Author>Author id: {authorId}</Author>
+      <AddCommentForm postId={id} commentsId={commentsId} />
+      <Comments commentsId={commentsId} />
     </PostContainer>
   );
 };
 
-export default Post;
+export default SinglePost;
