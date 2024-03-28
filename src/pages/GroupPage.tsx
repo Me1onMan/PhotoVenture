@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { TGroupCardProps } from '@/components/GroupsContainer/GroupCard/types';
 import Navbar from '@/components/Navbar';
-import { TPostProps } from '@/components/PostsContainer/Post/types';
-import SinglePost from '@/components/SinglePost';
-import getSinglePost from '@/firebase/actions/getSinglePost';
+import SingleGroup from '@/components/SingleGroup';
+import getGroup from '@/firebase/actions/getGroup';
 
-const PostPage = () => {
-  const { postId } = useParams();
+const GroupPage = () => {
+  const { groupId } = useParams();
 
-  const [post, setPost] = useState<TPostProps>();
+  const [group, setGroup] = useState<TGroupCardProps>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const getPostData = async () => {
       try {
         setIsLoading(true);
-        const loadedPost = await getSinglePost(postId);
-        setPost(loadedPost);
+        const loadedGroup = await getGroup(groupId);
+        setGroup(loadedGroup);
       } catch (error) {
         console.log(error);
         throw new Error('Error occured in SinglePost useEffect()');
@@ -27,16 +27,16 @@ const PostPage = () => {
     };
 
     getPostData();
-  }, [postId]);
+  }, [groupId]);
 
-  if (isLoading) return <h1>Loading post...</h1>;
+  if (isLoading) return <h1>Loading group...</h1>;
 
   return (
     <>
       <Navbar />
-      <SinglePost id={post.id} data={post.data} />
+      <SingleGroup id={group.id} data={group.data} />
     </>
   );
 };
 
-export default PostPage;
+export default GroupPage;

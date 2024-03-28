@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Button from '@/components/UI/Button';
 import addUserToGroup from '@/firebase/actions/addUserToGroup';
@@ -35,7 +36,9 @@ const GroupCard: FC<TGroupCardProps> = ({ id, data }) => {
   return (
     <GroupCardContainer>
       <p>id: {id}</p>
-      <Title>{title}</Title>
+      <Title>
+        <Link to={`/group/${id}`}>{title}</Link>
+      </Title>
       <Description>{description}</Description>
       <Type>{type}</Type>
       <p>Owner id: {ownerId}</p>
