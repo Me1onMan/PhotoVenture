@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import usePhotosFromFirestore from '@/hooks/usePhotosFromFirestore';
 
@@ -36,7 +37,9 @@ const Post: FC<TPostProps> = ({ id, data }) => {
   return (
     <PostContainer>
       <p>id: {id}</p>
-      <Title>{title}</Title>
+      <Title>
+        <Link to={`/post/${id}`}>{title}</Link>
+      </Title>
       {photos.length > 0 && photos.map((photo) => <img key={photo} src={photo} alt="Post file" />)}
       <Description>{description}</Description>
       <Emotion>Emotion: {emotion}</Emotion>
