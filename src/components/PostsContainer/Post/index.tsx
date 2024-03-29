@@ -1,7 +1,11 @@
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import likePost from '@/firebase/actions/likePost';
 import usePhotosFromFirestore from '@/hooks/usePhotosFromFirestore';
+import { selectActiveUser } from '@/store/slices/activeUserSlice';
+import isLikedByUser from '@/utils/isLikedByUser';
 
 import {
   Access,
@@ -29,10 +33,21 @@ const Post: FC<TPostProps> = ({ id, data }) => {
     authorId,
     geoCoordinates,
     createdAt,
+    likedByIds,
   } = data;
   const creationDate = createdAt.toDate().toString();
 
   const photos = usePhotosFromFirestore(photoLinks);
+
+  const { id: userId } = useSelector(selectActiveUser);
+
+  const handleLike = async () => {
+    const newLikedByIds = isLikedByUser(userId, likedByIds)
+      ? likedByIds.filter((likedById) => likedById !== userId)
+      : [...likedByIds, userId];
+
+    await likePost(id, newLikedByIds);
+  };
 
   return (
     <PostContainer>
@@ -47,6 +62,9 @@ const Post: FC<TPostProps> = ({ id, data }) => {
       <Advices>Advices: {advices}</Advices>
       <Access>Access: {access}</Access>
       <GeoCoordinates>Geo coordinates: {geoCoordinates}</GeoCoordinates>
+      <button type="button" onClick={handleLike}>
+        {isLikedByUser(userId, likedByIds) ? 'Unlike' : 'Like'} {likedByIds.length}
+      </button>
       <CreatedAt>Created at: {creationDate}</CreatedAt>
       <Author>Author id: {authorId}</Author>
     </PostContainer>

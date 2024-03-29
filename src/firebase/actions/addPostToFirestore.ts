@@ -44,6 +44,7 @@ const addPostToFirestore = async ({
       geoCoordinates,
       createdAt: new Date(),
       commentsId: [],
+      likedByIds: [],
     });
   } catch (error) {
     console.log(error);

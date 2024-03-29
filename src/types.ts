@@ -29,9 +29,13 @@ export type TPost = {
   geoCoordinates: [number, number];
   createdAt: Timestamp;
   commentsId: Array<string>;
+  likedByIds: string[];
 };
 
-export type TPostCreate = Omit<TPost, 'id' | 'createdAt' | 'commentsId' | 'photoLinks'> & {
+export type TPostCreate = Omit<
+  TPost,
+  'id' | 'createdAt' | 'commentsId' | 'photoLinks' | 'likedByIds'
+> & {
   files: Array<TFile>;
 };
 
