@@ -1,10 +1,22 @@
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import navItems from '@/constants/navItems';
+import { logout } from '@/firebase';
+import { removeActiveUser } from '@/store/slices/activeUserSlice';
+
+import Button from '../UI/Button';
 
 import { Nav, NavItem, NavList } from './styled';
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    await logout();
+    dispatch(removeActiveUser());
+  };
+
   return (
     <Nav>
       <NavList>
@@ -24,6 +36,9 @@ const Navbar = () => {
           ))}
         </NavItem>
       </NavList>
+      <Button type="button" onClick={handleLogout}>
+        Logout
+      </Button>
     </Nav>
   );
 };
