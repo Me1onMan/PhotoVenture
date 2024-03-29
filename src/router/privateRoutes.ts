@@ -2,6 +2,7 @@ import GroupPage from '@/pages/GroupPage';
 import GroupsPage from '@/pages/GroupsPage';
 import HomePage from '@/pages/HomePage';
 import PostPage from '@/pages/PostPage';
+import UserPage from '@/pages/UserPage';
 import UsersPage from '@/pages/UsersPage';
 
 import {
@@ -9,6 +10,7 @@ import {
   HOME_PAGE_ROUTE,
   SINGLE_GROUP_ROUTE,
   SINGLE_POST_ROUTE,
+  SINGLE_USER_ROUTE,
   USERS_PAGE_ROUTE,
 } from './routes';
 import { TRoute } from './types';
@@ -33,6 +35,10 @@ const privateRoutes: Array<TRoute> = [
   {
     path: SINGLE_GROUP_ROUTE,
     element: GroupPage,
+  },
+  {
+    path: SINGLE_USER_ROUTE,
+    element: UserPage,
   },
 ];
 
