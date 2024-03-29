@@ -15,7 +15,7 @@ const getAllPosts = async (timeSortType: TSortOrder) => {
   const postsData = postsSnapshot.docs.map((doc) => {
     return {
       id: doc.id,
-      postData: doc.data(),
+      data: doc.data(),
     };
   }) as TPostProps[];
 
