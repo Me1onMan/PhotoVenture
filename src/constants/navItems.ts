@@ -1,4 +1,9 @@
-import { GROUPS_PAGE_ROUTE, HOME_PAGE_ROUTE, USERS_PAGE_ROUTE } from '@/router/routes';
+import {
+  GROUPS_PAGE_ROUTE,
+  HOME_PAGE_ROUTE,
+  MAP_PAGE_ROUTE,
+  USERS_PAGE_ROUTE,
+} from '@/router/routes';
 
 type TNavItem = {
   to: string;
@@ -17,6 +22,10 @@ const navItems: Array<TNavItem> = [
   {
     to: USERS_PAGE_ROUTE,
     title: 'Users',
+  },
+  {
+    to: MAP_PAGE_ROUTE,
+    title: 'Map',
   },
 ];
 
