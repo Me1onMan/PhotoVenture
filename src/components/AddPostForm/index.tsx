@@ -1,4 +1,5 @@
 import { FC, FormEvent, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 
 import EMOTIONS from '@/constants/emotions';
@@ -7,10 +8,13 @@ import addPostToFirestore from '@/firebase/actions/addPostToFirestore';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
 import { TEmotions, TFile, TPostTypes } from '@/types';
 
+import ModalMap from '../ModalMap';
 import Button from '../UI/Button';
 import MultipleFileInput from '../UI/FilesInput';
 import Input from '../UI/Input';
 import Select from '../UI/Select';
+
+const modalContainer = document.getElementById('modal');
 
 const AddPostForm: FC = () => {
   const { id: authorId } = useSelector(selectActiveUser);
@@ -28,11 +32,16 @@ const AddPostForm: FC = () => {
   // const [fileNames, setFileNames] = useState<Array<string>>([]);
   // const [geoCoordinates, setGeoCoordinates] = useState<[number, number]>([0, 0]);
 
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // const changeFiles = (e: ChangeEvent<HTMLInputElement>) => {
-  //   setFiles(e.target.files);
-  // };
+  const openModalMap = () => {
+    setIsShowModal(true);
+  };
+  const closeModalMap = () => {
+    setIsShowModal(false);
+  };
 
   const clearForm = () => {
     setTitle('');
@@ -71,8 +80,6 @@ const AddPostForm: FC = () => {
     }
   };
 
-  // console.log(authorId);
-
   return (
     <form onSubmit={handleSubmit}>
       <Input value={title} setValue={setTitle} name="title" placeholder="Title" />
@@ -97,6 +104,7 @@ const AddPostForm: FC = () => {
         placeholder="Longitude"
         type="number"
       />
+      <Button onClick={openModalMap}>Select on map</Button>
       <Select
         selectedValue={emotion}
         setSelectedValue={setEmotion}
@@ -115,15 +123,15 @@ const AddPostForm: FC = () => {
         options={['public', 'private']}
         placeholder="Access"
       />
-      {/* <label>
-        <p>Upload img</p>
-        <input type="image" alt="asdsad" onChange={} />
-        <p />
-      </label> */}
       <MultipleFileInput files={files} setFiles={setFiles} />
       <Button type="submit" disabled={isLoading}>
         Create post
       </Button>
+      {isShowModal &&
+        createPortal(
+          <ModalMap closeModal={closeModalMap} setLat={setLatitude} setLng={setLongitude} />,
+          modalContainer,
+        )}
     </form>
   );
 };
