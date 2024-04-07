@@ -2,7 +2,7 @@ import { Timestamp } from 'firebase/firestore';
 
 export type TUser = {
   id: string;
-  token: string;
+  // token: string;
   login: string;
   email: string;
   telegramLink: string;

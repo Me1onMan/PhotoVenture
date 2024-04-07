@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import register from '@/firebase/actions/register';
@@ -16,6 +17,7 @@ import Input from '../UI/Input';
 // };
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
   // const {register, handleSubmit} = useForm<TFormInput>();
 
   const [login, setLogin] = useState<string>('');
@@ -24,8 +26,10 @@ const RegisterForm = () => {
   const [password, setPassword] = useState<string>('');
 
   // const onSubmit: SubmitHandler<TFormInput> = () => {};
-  const handleSubmit = () => {
-    register({ login, email, telegramLink, password });
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    await register({ login, email, telegramLink, password }, dispatch);
   };
 
   return (
@@ -48,9 +52,7 @@ const RegisterForm = () => {
           placeholder="Password"
           type="password"
         />
-        <Button type="button" onClick={handleSubmit}>
-          Register
-        </Button>
+        <Button type="submit">Register</Button>
       </form>
       <NavLink to={LOGIN_PAGE_ROUTE}>To login page</NavLink>
     </>

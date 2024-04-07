@@ -11,11 +11,12 @@ const addUserToFirestore = async ({
   telegramLink,
 }: Omit<TUserRegistraton, 'password'>) => {
   try {
-    addDoc(collection(database, USERS_COLLECTION), {
+    const createdUser = await addDoc(collection(database, USERS_COLLECTION), {
       login,
       email,
       telegramLink,
     });
+    return { login, email, telegramLink, id: createdUser.id };
   } catch (error) {
     console.log(error);
     throw new Error('Error occured in addUserToFirestore()');

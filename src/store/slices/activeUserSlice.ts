@@ -28,6 +28,9 @@ const activeUserSlice = createSlice({
     removeActiveUser(state) {
       state.entity = undefined;
     },
+    setActiveUser(state, payload) {
+      state.entity = payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserByLogin.fulfilled, (state, action) => {
@@ -38,5 +41,5 @@ const activeUserSlice = createSlice({
 
 export const selectActiveUser = (state: { activeUser: { entity: TUserWOPassword } }) =>
   state.activeUser.entity;
-export const { removeActiveUser } = activeUserSlice.actions;
+export const { removeActiveUser, setActiveUser } = activeUserSlice.actions;
 export default activeUserSlice.reducer;
