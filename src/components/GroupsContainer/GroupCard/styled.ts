@@ -8,4 +8,4 @@ export const Title = styled.h3``;
 
 export const Description = styled.p``;
 
-export const Type = styled.p``;
+export const Access = styled.p``;

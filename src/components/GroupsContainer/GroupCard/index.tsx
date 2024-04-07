@@ -7,11 +7,11 @@ import addUserToGroup from '@/firebase/actions/addUserToGroup';
 import removeUserFromGroup from '@/firebase/actions/removeUserFromGroup';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
 
-import { Description, GroupCardContainer, Title, Type } from './styled';
+import { Access, Description, GroupCardContainer, Title } from './styled';
 import { TGroupCardProps } from './types';
 
 const GroupCard: FC<TGroupCardProps> = ({ id, data }) => {
-  const { title, description, type, membersId, ownerId } = data;
+  const { title, description, access, membersId, ownerId } = data;
   const { id: activeUserId } = useSelector(selectActiveUser);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,7 +40,7 @@ const GroupCard: FC<TGroupCardProps> = ({ id, data }) => {
         <Link to={`/group/${id}`}>{title}</Link>
       </Title>
       <Description>{description}</Description>
-      <Type>{type}</Type>
+      <Access>{access}</Access>
       <p>Owner id: {ownerId}</p>
       <Button onClick={joinGroup} type="button" disabled={isLoading}>
         {isActiveUserInGroup() ? 'Leave' : 'Join'}

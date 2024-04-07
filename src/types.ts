@@ -50,10 +50,12 @@ export type TGroup = {
   id: string;
   title: string;
   description: string;
-  type: 'public' | 'private';
+  access: 'public' | 'private';
   membersId: Array<string>;
   ownerId: string;
 };
+
+export type TGroupCreate = Omit<TGroup, 'id' | 'membersId'>;
 
 export type TIsAuth = {
   isAuth: boolean;
