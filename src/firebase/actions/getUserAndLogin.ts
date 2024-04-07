@@ -18,10 +18,12 @@ const getUserAndLogin = async (login: string, password: string) => {
 
   const userData = querySnapshot.docs[0].data();
   const userEmail = userData.email;
+  const userId = querySnapshot.docs[0].id;
 
   const userCredentials = await signIn(userEmail, password);
+
   const user: TUserWOPassword = {
-    id: userCredentials.user.uid,
+    id: userId,
     token: await userCredentials.user.getIdToken(),
     login: userData.login,
     email: userEmail,
