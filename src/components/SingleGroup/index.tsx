@@ -1,10 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import getPostsByGroupId from '@/firebase/actions/getPostsByGroupId';
+import usePostsForGroup from '@/hooks/usePostsForGroup';
 
 import Post from '../PostsContainer/Post';
-import { TPostProps } from '../PostsContainer/Post/types';
 import Button from '../UI/Button';
 
 import ModalAddMember from './ModalAddMember';
@@ -15,22 +14,10 @@ const modalContainer = document.getElementById('modal');
 
 const SingleGroup: FC<TProps> = ({ id, data }) => {
   const { title, description, access, ownerId, membersId } = data;
-  const [posts, setPosts] = useState<TPostProps[]>([]);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    const loadPosts = async () => {
-      try {
-        const loadedPosts = await getPostsByGroupId(id);
-        setPosts(loadedPosts);
-      } catch (error) {
-        throw new Error(error);
-      }
-    };
-
-    loadPosts();
-  }, [id]);
+  const [posts, isPostsLoading] = usePostsForGroup(id);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -60,8 +47,11 @@ const SingleGroup: FC<TProps> = ({ id, data }) => {
         </p>
       ))}
       <h3>Posts</h3>
+      {isPostsLoading && <p>Loading posts...</p>}
+      {!isPostsLoading && posts.length === 0 && <p>No posts.</p>}
       <div>
-        {posts.length > 0 &&
+        {!isPostsLoading &&
+          posts.length > 0 &&
           posts.map((post) => <Post key={post.id} id={post.id} data={post.data} />)}
       </div>
     </GroupContainer>
