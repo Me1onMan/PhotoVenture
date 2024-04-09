@@ -1,6 +1,6 @@
 import { FC, MouseEvent, useState } from 'react';
 
-import Button from '../UI/Button';
+import Button from '../../UI/Button';
 
 import Map from './MapSelect';
 import { ModalContainer, ModalWrapper } from './styled';

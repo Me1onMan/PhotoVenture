@@ -8,11 +8,12 @@ import addPostToFirestore from '@/firebase/actions/addPostToFirestore';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
 import { TEmotions, TFile, TPostTypes } from '@/types';
 
-import ModalMap from '../ModalMap';
 import Button from '../UI/Button';
 import MultipleFileInput from '../UI/FilesInput';
 import Input from '../UI/Input';
 import Select from '../UI/Select';
+
+import ModalMap from './ModalMap';
 
 const modalContainer = document.getElementById('modal');
 

@@ -6,5 +6,5 @@ export const GroupContainer = styled.div`
 `;
 export const Title = styled.h1``;
 export const Description = styled.p``;
-export const Type = styled.p``;
+export const Access = styled.p``;
 export const Owner = styled.p``;
