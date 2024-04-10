@@ -33,18 +33,7 @@ const ModalEditProfile: FC<TModalEditProfileProps> = ({ closeModal, userData }) 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isEmailChanged = newEmail !== email && newEmail !== '';
-    const isNewPasswordEntered = !!newPassword;
-
-    if (!isEmailChanged && !isNewPasswordEntered) {
-      const isLoginChanged = newLogin !== login && newLogin !== '';
-      const isTelegramChanged = newTelegramLink !== telegramLink && newTelegramLink !== '';
-
-      if (isLoginChanged || isTelegramChanged) {
-        await updateUserDB(userId, newLogin, newTelegramLink);
-        return;
-      }
-    }
+    // const isEmailChanged = newEmail !== email && newEmail !== '';
 
     const user = auth.currentUser;
     if (!user) return;
@@ -52,8 +41,10 @@ const ModalEditProfile: FC<TModalEditProfileProps> = ({ closeModal, userData }) 
     const credential = EmailAuthProvider.credential(email, oldPassword);
 
     try {
-      await reauthenticateWithCredential(user, credential);
+      const isNewPasswordEntered = !!newPassword;
+
       if (isNewPasswordEntered) {
+        await reauthenticateWithCredential(user, credential);
         await updatePassword(user, newPassword);
         // const newCredential = EmailAuthProvider.credential(email, newPassword);
         // await reauthenticateWithCredential(user, newCredential);
