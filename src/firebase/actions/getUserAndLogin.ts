@@ -20,11 +20,10 @@ const getUserAndLogin = async (login: string, password: string) => {
   const userEmail = userData.email;
   const userId = querySnapshot.docs[0].id;
 
-  const userCredentials = await signIn(userEmail, password);
+  await signIn(userEmail, password);
 
   const user: TUserWOPassword = {
     id: userId,
-    token: await userCredentials.user.getIdToken(),
     login: userData.login,
     email: userEmail,
     telegramLink: userData.telegramLink,
