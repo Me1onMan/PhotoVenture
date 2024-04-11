@@ -1,0 +1,10 @@
+export const LOGIN_PAGE_ROUTE = '/login';
+export const REGISTRATION_PAGE_ROUTE = '/registration';
+export const HOME_PAGE_ROUTE = '/home';
+export const USERS_PAGE_ROUTE = '/users';
+export const GROUPS_PAGE_ROUTE = '/groups';
+export const SINGLE_POST_ROUTE = '/post/:postId';
+export const SINGLE_GROUP_ROUTE = '/group/:groupId';
+export const SINGLE_USER_ROUTE = '/user/:userId';
+export const MAP_PAGE_ROUTE = '/map';
+export const NOT_FOUND_PAGE_ROUTE = '*';
