@@ -32,7 +32,6 @@ const GroupCard: FC<TGroupCardProps> = ({ id, data }) => {
       if (isActiveUserInGroup()) await removeUserFromGroup(id, membersId, activeUserId);
       else await addUserToGroup(id, membersId, activeUserId);
     } catch (error) {
-      console.log(error);
       throw new Error('Error occured in GroupCard joinGroup()');
     } finally {
       setIsLoading(false);
