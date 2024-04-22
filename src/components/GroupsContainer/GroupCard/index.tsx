@@ -20,6 +20,12 @@ const GroupCard: FC<TGroupCardProps> = ({ id, data }) => {
     return membersId.includes(activeUserId);
   };
 
+  const isShowButton = () => {
+    if (access === 'public') return true;
+    if (access === 'private' && isActiveUserInGroup()) return true;
+    return false;
+  };
+
   const joinGroup = async () => {
     try {
       setIsLoading(true);
@@ -42,9 +48,11 @@ const GroupCard: FC<TGroupCardProps> = ({ id, data }) => {
       <Description>{description}</Description>
       <Access>{access}</Access>
       <p>Owner id: {ownerId}</p>
-      <Button onClick={joinGroup} type="button" disabled={isLoading}>
-        {isActiveUserInGroup() ? 'Leave' : 'Join'}
-      </Button>
+      {isShowButton() && (
+        <Button onClick={joinGroup} type="button" disabled={isLoading}>
+          {isActiveUserInGroup() ? 'Leave' : 'Join'}
+        </Button>
+      )}
       <h4>membersId: </h4>
       {membersId.map((el) => (
         <p key={el}>{el}</p>
