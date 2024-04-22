@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import withModalWrapper from '@/HOCs/ModalWrapper';
 import usePostsForGroup from '@/hooks/usePostsForGroup';
 
 import Post from '../PostsContainer/Post';
@@ -27,6 +28,8 @@ const SingleGroup: FC<TProps> = ({ id, data }) => {
     setIsModalOpen(false);
   };
 
+  const AddMember = withModalWrapper(closeModal, ModalAddMember);
+
   return (
     <GroupContainer>
       <p>groupId: {id}</p>
@@ -36,10 +39,7 @@ const SingleGroup: FC<TProps> = ({ id, data }) => {
       <Owner>Owner id: {ownerId}</Owner>
       <Button onClick={openModal}>Add member</Button>
       {isModalOpen &&
-        createPortal(
-          <ModalAddMember closeModal={closeModal} groupId={id} membersId={membersId} />,
-          modalContainer,
-        )}
+        createPortal(<AddMember groupId={id} membersId={membersId} />, modalContainer)}
       <h3>Members:</h3>
       {membersId.map((memberId, index) => (
         <p key={memberId}>

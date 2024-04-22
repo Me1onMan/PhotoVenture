@@ -1,20 +1,24 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { FC, MouseEvent } from 'react';
+import { ComponentType, FC, MouseEvent } from 'react';
 
 import Button from '@/components/UI/Button';
 
 import { ModalContainer, ModalWrapper } from './styled';
+import { TModalProps } from './types';
 
-const withModalWrapper = (closeModal, WrappedComponent) => {
+const withModalWrapper = <P extends TModalProps>(
+  closeModal: () => void,
+  WrappedComponent: ComponentType<P>,
+) => {
   const closeOnOutsideClick = (e: MouseEvent<HTMLElement>) => {
     if (e.target === e.currentTarget) closeModal();
   };
 
-  const ModalWrapperComponent: FC = (props) => {
+  const ModalWrapperComponent: FC<Omit<P, keyof TModalProps>> = (props) => {
     return (
       <ModalWrapper onClick={closeOnOutsideClick}>
         <ModalContainer>
-          <WrappedComponent {...props} />
+          <WrappedComponent {...(props as P)} />
           <Button onClick={closeModal}>Close</Button>
         </ModalContainer>
       </ModalWrapper>
