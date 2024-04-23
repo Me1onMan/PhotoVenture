@@ -1,4 +1,4 @@
-import { FC, FormEvent, MouseEvent, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
 
 import Button from '@/components/UI/Button';
@@ -6,10 +6,9 @@ import Input from '@/components/UI/Input';
 import { auth } from '@/firebase';
 import updateUserDB from '@/firebase/actions/updateUserDB';
 
-import { ModalContainer, ModalWrapper } from './styled';
 import { TModalEditProfileProps } from './types';
 
-const ModalEditProfile: FC<TModalEditProfileProps> = ({ closeModal, userData }) => {
+const ModalEditProfile: FC<TModalEditProfileProps> = ({ userData }) => {
   const {
     id: userId,
     data: { login, email, telegramLink },
@@ -20,10 +19,6 @@ const ModalEditProfile: FC<TModalEditProfileProps> = ({ closeModal, userData }) 
   const [newTelegramLink, setNewTelegramLink] = useState<string>(telegramLink);
   const [oldPassword, setOldPassword] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
-
-  const closeOnOutsideClick = (e: MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) closeModal();
-  };
 
   const clearPasswordInputs = () => {
     setOldPassword('');
@@ -68,50 +63,47 @@ const ModalEditProfile: FC<TModalEditProfileProps> = ({ closeModal, userData }) 
   };
 
   return (
-    <ModalWrapper onClick={closeOnOutsideClick}>
-      <ModalContainer>
-        <h1>Edit profile</h1>
-        <form onSubmit={handleSubmit}>
-          <Input
-            value={newLogin}
-            setValue={setNewLogin}
-            placeholder="Your login"
-            name="login"
-            type="text"
-          />
-          <Input
-            value={newEmail}
-            setValue={setNewEmail}
-            placeholder="Your email"
-            name="email"
-            type="email"
-          />
-          <Input
-            value={newTelegramLink}
-            setValue={setNewTelegramLink}
-            placeholder="Your telegram login"
-            name="telegram"
-            type="text"
-          />
-          <Input
-            value={oldPassword}
-            setValue={setOldPassword}
-            placeholder="Old password"
-            name="oldPassword"
-            type="password"
-          />
-          <Input
-            value={newPassword}
-            setValue={setNewPassword}
-            placeholder="New password"
-            name="newPassword"
-            type="password"
-          />
-          <Button type="submit">Update</Button>
-          <Button onClick={closeModal}>Close</Button>
-        </form>
-      </ModalContainer>
-    </ModalWrapper>
+    <>
+      <h1>Edit profile</h1>
+      <form onSubmit={handleSubmit}>
+        <Input
+          value={newLogin}
+          setValue={setNewLogin}
+          placeholder="Your login"
+          name="login"
+          type="text"
+        />
+        <Input
+          value={newEmail}
+          setValue={setNewEmail}
+          placeholder="Your email"
+          name="email"
+          type="email"
+        />
+        <Input
+          value={newTelegramLink}
+          setValue={setNewTelegramLink}
+          placeholder="Your telegram login"
+          name="telegram"
+          type="text"
+        />
+        <Input
+          value={oldPassword}
+          setValue={setOldPassword}
+          placeholder="Old password"
+          name="oldPassword"
+          type="password"
+        />
+        <Input
+          value={newPassword}
+          setValue={setNewPassword}
+          placeholder="New password"
+          name="newPassword"
+          type="password"
+        />
+        <Button type="submit">Update</Button>
+      </form>
+    </>
   );
 };
 

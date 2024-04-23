@@ -4,9 +4,8 @@ import { ComponentType, FC, MouseEvent } from 'react';
 import Button from '@/components/UI/Button';
 
 import { ModalContainer, ModalWrapper } from './styled';
-import { TModalProps } from './types';
 
-const withModalWrapper = <P extends TModalProps>(
+const withModalWrapper = <P extends object>(
   closeModal: () => void,
   WrappedComponent: ComponentType<P>,
 ) => {
@@ -14,7 +13,7 @@ const withModalWrapper = <P extends TModalProps>(
     if (e.target === e.currentTarget) closeModal();
   };
 
-  const ModalWrapperComponent: FC<Omit<P, keyof TModalProps>> = (props) => {
+  const ModalWrapperComponent: FC<P> = (props) => {
     return (
       <ModalWrapper onClick={closeOnOutsideClick}>
         <ModalContainer>

@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 
 import { MODAL } from '@/constants/cotainersId';
+import withModalWrapper from '@/HOCs/ModalWrapper';
 import usePostsForUser from '@/hooks/usePostsForUser';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
 
@@ -28,6 +29,8 @@ const SingleUser: FC<TProps> = ({ id, data }) => {
     setIsModalOpen(false);
   };
 
+  const EditProfile = withModalWrapper(closeModal, ModalEditProfile);
+
   return (
     <>
       <UserContainer>
@@ -45,8 +48,7 @@ const SingleUser: FC<TProps> = ({ id, data }) => {
             posts.map((post) => <Post key={post.id} id={post.id} data={post.data} />)}
         </div>
       </UserContainer>
-      {isModalOpen &&
-        createPortal(<ModalEditProfile closeModal={closeModal} userData={{ id, data }} />, MODAL)}
+      {isModalOpen && createPortal(<EditProfile userData={{ id, data }} />, MODAL)}
     </>
   );
 };
