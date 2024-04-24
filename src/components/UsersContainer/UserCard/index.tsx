@@ -1,17 +1,22 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
+import usePhotoFromFirestore from '@/hooks/usePhotoFromFirestore';
+
 import { Login, Telegram, UserCardContainer } from './styled';
 import { TUserCardProps } from './types';
 
 const UserCard: FC<TUserCardProps> = ({ id, data }) => {
-  const { login, email, telegramLink } = data;
+  const { login, email, telegramLink, photoLink } = data;
+  const photo = usePhotoFromFirestore(photoLink);
+
   return (
     <UserCardContainer>
       <p>id: {id}</p>
       <Login>
         login: <Link to={`/user/${id}`}>{login}</Link>
       </Login>
+      <img src={photo} alt={login} />
       <p>email: {email}</p>
       <Telegram>telegramLink: {telegramLink}</Telegram>
     </UserCardContainer>

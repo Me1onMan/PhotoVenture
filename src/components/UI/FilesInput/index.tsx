@@ -25,7 +25,7 @@ const MultipleFileInput: FC<TProps> = ({ files, setFiles }) => {
 
   return (
     <div>
-      <input type="file" multiple onChange={handleFileChange} />
+      <input type="file" multiple onChange={handleFileChange} accept="image/*" />
       <div>
         {files.map((file, index) => (
           <div key={file.name}>

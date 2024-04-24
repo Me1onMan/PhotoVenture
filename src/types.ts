@@ -7,6 +7,7 @@ export type TUser = {
   email: string;
   telegramLink: string;
   password: string;
+  photoLink: string;
 };
 
 export type TUserWOPassword = Omit<TUser, 'password'>;
