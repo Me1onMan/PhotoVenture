@@ -62,7 +62,10 @@ const AddGroupForm: FC = () => {
       <Select
         selectedValue={access}
         setSelectedValue={setAccess}
-        options={['public', 'private']}
+        options={[
+          { value: 'public', title: 'public' },
+          { value: 'private', title: 'private' },
+        ]}
         placeholder="Access"
       />
       <FileInput file={file} setFile={setFile} />

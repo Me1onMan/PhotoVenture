@@ -19,9 +19,9 @@ const Select: FC<TSelectProps> = ({
         <Option value="" disabled>
           {placeholder}
         </Option>
-        {options.map((option) => (
-          <Option value={option} key={option}>
-            {option}
+        {options.map(({ value, title }) => (
+          <Option value={value} key={value}>
+            {title}
           </Option>
         ))}
       </StyledSelect>
