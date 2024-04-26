@@ -8,7 +8,9 @@ const usePhotoFromFirestore = (photoLink: string) => {
 
   useEffect(() => {
     const getFile = async () => {
-      const downloadedFile = await getDownloadURL(ref(storageImagesRef, photoLink));
+      const downloadedFile = photoLink
+        ? await getDownloadURL(ref(storageImagesRef, photoLink))
+        : undefined;
 
       // const downloadedFile = await filePromise;
       setPhoto(downloadedFile);

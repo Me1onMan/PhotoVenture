@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import usePhotoFromFirestore from '@/hooks/usePhotoFromFirestore';
 
-import { Login, Telegram, UserCardContainer } from './styled';
+import { IconProfile, Login, Telegram, UserCardContainer } from './styled';
 import { TUserCardProps } from './types';
 
 const UserCard: FC<TUserCardProps> = ({ id, data }) => {
@@ -16,7 +16,7 @@ const UserCard: FC<TUserCardProps> = ({ id, data }) => {
       <Login>
         login: <Link to={`/user/${id}`}>{login}</Link>
       </Login>
-      <img src={photo} alt={login} />
+      {photoLink && <IconProfile src={photo} alt={login} />}
       <p>email: {email}</p>
       <Telegram>telegramLink: {telegramLink}</Telegram>
     </UserCardContainer>
