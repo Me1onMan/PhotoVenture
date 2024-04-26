@@ -54,6 +54,7 @@ export type TGroup = {
   access: 'public' | 'private';
   membersId: Array<string>;
   ownerId: string;
+  photoLink: string;
 };
 
 export type TGroupCreate = Omit<TGroup, 'id' | 'membersId'>;

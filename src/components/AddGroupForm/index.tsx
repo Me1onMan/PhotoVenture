@@ -2,9 +2,12 @@ import { FC, FormEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import addGroupToFirestore from '@/firebase/actions/addGroupToFirestore';
+import getFileLinkAndAddFileToFirestore from '@/firebase/actions/getFileLinkAndAddFileToFirestore';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
+import { TFile } from '@/types';
 
 import Button from '../UI/Button';
+import FileInput from '../UI/FileInput';
 import Input from '../UI/Input';
 import Select from '../UI/Select';
 
@@ -14,6 +17,7 @@ const AddGroupForm: FC = () => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [access, setAccess] = useState<'public' | 'private'>('public');
+  const [file, setFile] = useState<TFile>();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -27,8 +31,16 @@ const AddGroupForm: FC = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    const isPhotoLoaded = !!file;
+
     try {
-      addGroupToFirestore({ title, description, access, ownerId });
+      if (isPhotoLoaded) {
+        const photoLink = await getFileLinkAndAddFileToFirestore(file, ownerId);
+        await addGroupToFirestore({ title, description, access, ownerId, photoLink });
+      } else {
+        const photoLink = '';
+        await addGroupToFirestore({ title, description, access, ownerId, photoLink });
+      }
       clearForm();
     } catch (error) {
       console.log(error);
@@ -53,6 +65,7 @@ const AddGroupForm: FC = () => {
         options={['public', 'private']}
         placeholder="Access"
       />
+      <FileInput file={file} setFile={setFile} />
       <Button type="submit" disabled={isLoading}>
         {isLoading ? 'Creating...' : 'Create group'}
       </Button>

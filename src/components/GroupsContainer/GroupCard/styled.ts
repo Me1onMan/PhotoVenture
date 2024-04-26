@@ -6,6 +6,10 @@ export const GroupCardContainer = styled.div`
 
 export const Title = styled.h3``;
 
+export const IconProfile = styled.img`
+  height: 50px;
+`;
+
 export const Description = styled.p``;
 
 export const Access = styled.p``;

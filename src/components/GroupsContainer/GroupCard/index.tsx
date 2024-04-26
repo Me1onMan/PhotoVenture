@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 import Button from '@/components/UI/Button';
 import addUserToGroup from '@/firebase/actions/addUserToGroup';
 import removeUserFromGroup from '@/firebase/actions/removeUserFromGroup';
+import usePhotoFromFirestore from '@/hooks/usePhotoFromFirestore';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
 
-import { Access, Description, GroupCardContainer, Title } from './styled';
+import { Access, Description, GroupCardContainer, IconProfile, Title } from './styled';
 import { TGroupCardProps } from './types';
 
 const GroupCard: FC<TGroupCardProps> = ({ id, data }) => {
-  const { title, description, access, membersId, ownerId } = data;
+  const { title, description, access, membersId, ownerId, photoLink } = data;
+  const photo = usePhotoFromFirestore(photoLink);
   const { id: activeUserId } = useSelector(selectActiveUser);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -44,6 +46,7 @@ const GroupCard: FC<TGroupCardProps> = ({ id, data }) => {
       <Title>
         <Link to={`/group/${id}`}>{title}</Link>
       </Title>
+      {photoLink && <IconProfile src={photo} alt={title} />}
       <Description>{description}</Description>
       <Access>{access}</Access>
       <p>Owner id: {ownerId}</p>
