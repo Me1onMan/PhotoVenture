@@ -1,10 +1,11 @@
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 
 import EMOTIONS from '@/constants/emotions';
 import POST_TYPES from '@/constants/postTypes';
 import addPostToFirestore from '@/firebase/actions/addPostToFirestore';
+import getGroups from '@/firebase/actions/getGroups';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
 import { TEmotions, TFile, TPostTypes } from '@/types';
 
@@ -12,6 +13,7 @@ import Button from '../UI/Button';
 import MultipleFileInput from '../UI/FilesInput';
 import Input from '../UI/Input';
 import Select from '../UI/Select';
+import { TOption } from '../UI/Select/types';
 
 import ModalMap from './ModalMap';
 
@@ -37,9 +39,24 @@ const AddPostForm: FC = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const [groupsOptions, setGroupsOptions] = useState<TOption[]>([]);
+
+  useEffect(() => {
+    const getUserGroups = async () => {
+      const groups = await getGroups();
+      const filteredOptions = groups
+        .filter(({ data: { membersId } }) => membersId.includes(authorId))
+        .map(({ id, data: { title: groupTitle } }) => ({ value: id, title: groupTitle }));
+      setGroupsOptions(filteredOptions);
+    };
+
+    getUserGroups();
+  }, [authorId]);
+
   const openModalMap = () => {
     setIsShowModal(true);
   };
+
   const closeModalMap = () => {
     setIsShowModal(false);
   };
@@ -109,19 +126,23 @@ const AddPostForm: FC = () => {
       <Select
         selectedValue={emotion}
         setSelectedValue={setEmotion}
-        options={EMOTIONS}
+        options={EMOTIONS.map((emotionEl) => ({ value: emotionEl, title: emotionEl }))}
         placeholder="Emotion"
       />
       <Select
         selectedValue={postType}
         setSelectedValue={setPostType}
-        options={POST_TYPES}
+        options={POST_TYPES.map((typeEl) => ({ value: typeEl, title: typeEl }))}
         placeholder="Post type"
       />
       <Select
         selectedValue={access}
         setSelectedValue={setAccess}
-        options={['public', 'private']}
+        options={[
+          { value: 'public', title: 'public' },
+          { value: 'private', title: 'private' },
+          ...groupsOptions,
+        ]}
         placeholder="Access"
       />
       <MultipleFileInput files={files} setFiles={setFiles} />

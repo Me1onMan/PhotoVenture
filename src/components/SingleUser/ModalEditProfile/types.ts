@@ -6,6 +6,5 @@ type TCurrentUser = {
 };
 
 export type TModalEditProfileProps = {
-  closeModal: () => void;
   userData: TCurrentUser;
 };

@@ -27,6 +27,7 @@ const getUserAndLogin = async (login: string, password: string) => {
     login: userData.login,
     email: userEmail,
     telegramLink: userData.telegramLink,
+    photoLink: '',
   };
 
   return user;

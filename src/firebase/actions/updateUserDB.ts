@@ -7,12 +7,12 @@ const updateUserDB = async (
   userId: string,
   newLogin: string,
   newTelegramLink: string,
-  newEmail?: string,
+  newPhotoLink?: string,
 ) => {
   const userRef = doc(database, USERS_COLLECTION, userId);
 
-  const updatedFileds = newEmail
-    ? { login: newLogin, telegramLink: newTelegramLink, email: newEmail }
+  const updatedFileds = newPhotoLink
+    ? { login: newLogin, telegramLink: newTelegramLink, photoLink: newPhotoLink }
     : { login: newLogin, telegramLink: newTelegramLink };
 
   await updateDoc(userRef, updatedFileds);

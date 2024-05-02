@@ -5,7 +5,13 @@ import { TGroupCreate } from '@/types';
 import { GROUPS_COLLECTION } from '../collections';
 import { database } from '..';
 
-const addGroupToFirestore = async ({ title, description, access, ownerId }: TGroupCreate) => {
+const addGroupToFirestore = async ({
+  title,
+  description,
+  access,
+  ownerId,
+  photoLink,
+}: TGroupCreate) => {
   try {
     await addDoc(collection(database, GROUPS_COLLECTION), {
       title,
@@ -13,6 +19,7 @@ const addGroupToFirestore = async ({ title, description, access, ownerId }: TGro
       access,
       ownerId,
       membersId: [ownerId],
+      photoLink,
     });
   } catch (error) {
     console.log(error);

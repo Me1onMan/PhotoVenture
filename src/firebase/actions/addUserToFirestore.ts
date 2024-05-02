@@ -9,7 +9,7 @@ const addUserToFirestore = async ({
   login,
   email,
   telegramLink,
-}: Omit<TUserRegistraton, 'password'>) => {
+}: Omit<TUserRegistraton, 'password' | 'photoLink'>) => {
   try {
     const createdUser = await addDoc(collection(database, USERS_COLLECTION), {
       login,

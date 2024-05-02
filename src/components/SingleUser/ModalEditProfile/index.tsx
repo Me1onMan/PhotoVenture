@@ -1,18 +1,23 @@
-import { FC, FormEvent, MouseEvent, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { EmailAuthProvider, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
+import { deleteObject, ref } from 'firebase/storage';
 
 import Button from '@/components/UI/Button';
+import FileInput from '@/components/UI/FileInput';
 import Input from '@/components/UI/Input';
-import { auth } from '@/firebase';
+import { auth, storage } from '@/firebase';
+import getFileLinkAndAddFileToFirestore from '@/firebase/actions/getFileLinkAndAddFileToFirestore';
 import updateUserDB from '@/firebase/actions/updateUserDB';
+import usePhotoFromFirestore from '@/hooks/usePhotoFromFirestore';
+import { TFile } from '@/types';
 
-import { ModalContainer, ModalWrapper } from './styled';
+import { IconProfile } from './styled';
 import { TModalEditProfileProps } from './types';
 
-const ModalEditProfile: FC<TModalEditProfileProps> = ({ closeModal, userData }) => {
+const ModalEditProfile: FC<TModalEditProfileProps> = ({ userData }) => {
   const {
     id: userId,
-    data: { login, email, telegramLink },
+    data: { login, email, telegramLink, photoLink },
   } = userData;
 
   const [newLogin, setNewLogin] = useState<string>(login);
@@ -20,10 +25,9 @@ const ModalEditProfile: FC<TModalEditProfileProps> = ({ closeModal, userData }) 
   const [newTelegramLink, setNewTelegramLink] = useState<string>(telegramLink);
   const [oldPassword, setOldPassword] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
+  const [newFile, setNewFile] = useState<TFile>();
 
-  const closeOnOutsideClick = (e: MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) closeModal();
-  };
+  const photo = usePhotoFromFirestore(photoLink);
 
   const clearPasswordInputs = () => {
     setOldPassword('');
@@ -56,9 +60,18 @@ const ModalEditProfile: FC<TModalEditProfileProps> = ({ closeModal, userData }) 
 
       const isLoginChanged = newLogin !== login && newLogin !== '';
       const isTelegramChanged = newTelegramLink !== telegramLink && newTelegramLink !== '';
+      const isNewPhotoLoaded = !!newFile;
 
-      if (isLoginChanged || isTelegramChanged) {
-        await updateUserDB(userId, newLogin, newTelegramLink);
+      if (isLoginChanged || isTelegramChanged || isNewPhotoLoaded) {
+        if (isNewPhotoLoaded) {
+          const oldFileRef = ref(storage, `images/${photoLink}`);
+          const newFileLink = await getFileLinkAndAddFileToFirestore(newFile, userId);
+          await updateUserDB(userId, newLogin, newTelegramLink, newFileLink);
+
+          if (photoLink) {
+            await deleteObject(oldFileRef);
+          }
+        } else await updateUserDB(userId, newLogin, newTelegramLink);
       }
     } catch (error) {
       throw new Error(`Error occured while updating password: ${error}`);
@@ -68,50 +81,49 @@ const ModalEditProfile: FC<TModalEditProfileProps> = ({ closeModal, userData }) 
   };
 
   return (
-    <ModalWrapper onClick={closeOnOutsideClick}>
-      <ModalContainer>
-        <h1>Edit profile</h1>
-        <form onSubmit={handleSubmit}>
-          <Input
-            value={newLogin}
-            setValue={setNewLogin}
-            placeholder="Your login"
-            name="login"
-            type="text"
-          />
-          <Input
-            value={newEmail}
-            setValue={setNewEmail}
-            placeholder="Your email"
-            name="email"
-            type="email"
-          />
-          <Input
-            value={newTelegramLink}
-            setValue={setNewTelegramLink}
-            placeholder="Your telegram login"
-            name="telegram"
-            type="text"
-          />
-          <Input
-            value={oldPassword}
-            setValue={setOldPassword}
-            placeholder="Old password"
-            name="oldPassword"
-            type="password"
-          />
-          <Input
-            value={newPassword}
-            setValue={setNewPassword}
-            placeholder="New password"
-            name="newPassword"
-            type="password"
-          />
-          <Button type="submit">Update</Button>
-          <Button onClick={closeModal}>Close</Button>
-        </form>
-      </ModalContainer>
-    </ModalWrapper>
+    <>
+      <h1>Edit profile</h1>
+      {photoLink && <IconProfile src={photo} alt={login} />}
+      <form onSubmit={handleSubmit}>
+        <Input
+          value={newLogin}
+          setValue={setNewLogin}
+          placeholder="Your login"
+          name="login"
+          type="text"
+        />
+        <Input
+          value={newEmail}
+          setValue={setNewEmail}
+          placeholder="Your email"
+          name="email"
+          type="email"
+        />
+        <Input
+          value={newTelegramLink}
+          setValue={setNewTelegramLink}
+          placeholder="Your telegram login"
+          name="telegram"
+          type="text"
+        />
+        <Input
+          value={oldPassword}
+          setValue={setOldPassword}
+          placeholder="Old password"
+          name="oldPassword"
+          type="password"
+        />
+        <Input
+          value={newPassword}
+          setValue={setNewPassword}
+          placeholder="New password"
+          name="newPassword"
+          type="password"
+        />
+        <FileInput file={newFile} setFile={setNewFile} />
+        <Button type="submit">Update</Button>
+      </form>
+    </>
   );
 };
 

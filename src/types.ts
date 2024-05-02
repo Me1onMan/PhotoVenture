@@ -7,6 +7,7 @@ export type TUser = {
   email: string;
   telegramLink: string;
   password: string;
+  photoLink: string;
 };
 
 export type TUserWOPassword = Omit<TUser, 'password'>;
@@ -53,6 +54,7 @@ export type TGroup = {
   access: 'public' | 'private';
   membersId: Array<string>;
   ownerId: string;
+  photoLink: string;
 };
 
 export type TGroupCreate = Omit<TGroup, 'id' | 'membersId'>;

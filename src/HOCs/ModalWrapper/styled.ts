@@ -26,7 +26,3 @@ export const ModalContainer = styled.div`
 
   background-color: goldenrod;
 `;
-
-export const IconProfile = styled.img`
-  height: 200px;
-`;
