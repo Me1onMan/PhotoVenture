@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 
-import usePosts from '@/hooks/usePosts';
+// import usePosts from '@/hooks/usePosts';
 import searchPosts from '@/utils/searchPosts';
 
 import Search from '../UI/Search';
@@ -8,9 +8,10 @@ import Search from '../UI/Search';
 import { TPostProps } from './Post/types';
 import Post from './Post';
 import { Container } from './styled';
+import { TPostsContainerProps } from './types';
 
-const PostsContainer: FC = () => {
-  const posts = usePosts();
+const PostsContainer: FC<TPostsContainerProps> = ({ posts }) => {
+  // const posts = usePosts();
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredPosts, setFilteredPosts] = useState<TPostProps[]>(posts);
 

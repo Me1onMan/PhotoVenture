@@ -1,6 +1,7 @@
 import GroupPage from '@/pages/GroupPage';
 import GroupsPage from '@/pages/GroupsPage';
 import HomePage from '@/pages/HomePage';
+import LikesPage from '@/pages/LikesPage';
 import MapPage from '@/pages/MapPage';
 import PostPage from '@/pages/PostPage';
 import UserPage from '@/pages/UserPage';
@@ -9,6 +10,7 @@ import UsersPage from '@/pages/UsersPage';
 import {
   GROUPS_PAGE_ROUTE,
   HOME_PAGE_ROUTE,
+  LIKED_POSTS_PAGE_ROUTE,
   MAP_PAGE_ROUTE,
   SINGLE_GROUP_ROUTE,
   SINGLE_POST_ROUTE,
@@ -33,6 +35,10 @@ const privateRoutes: Array<TRoute> = [
   {
     path: SINGLE_POST_ROUTE,
     element: PostPage,
+  },
+  {
+    path: LIKED_POSTS_PAGE_ROUTE,
+    element: LikesPage,
   },
   {
     path: SINGLE_GROUP_ROUTE,
