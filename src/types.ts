@@ -76,3 +76,9 @@ export type TFile =
   | null;
 
 export type TSortOrder = 'asc' | 'desc';
+
+export type TFilterOptions = {
+  types: TPostTypes[];
+  emotions: TEmotions[];
+  access: string[];
+};

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import likePost from '@/firebase/actions/likePost';
 import usePhotosFromFirestore from '@/hooks/usePhotosFromFirestore';
+import useUser from '@/hooks/useUser';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
 import isLikedByUser from '@/utils/isLikedByUser';
 
@@ -41,6 +42,8 @@ const Post: FC<TPostProps> = ({ id, data }) => {
 
   const { id: userId } = useSelector(selectActiveUser);
 
+  const [author, isAuthorLoading] = useUser(authorId);
+
   const handleLike = async () => {
     const newLikedByIds = isLikedByUser(userId, likedByIds)
       ? likedByIds.filter((likedById) => likedById !== userId)
@@ -51,6 +54,14 @@ const Post: FC<TPostProps> = ({ id, data }) => {
 
   return (
     <PostContainer>
+      {isAuthorLoading ? (
+        <h4>Loading author...</h4>
+      ) : (
+        <div>
+          <Author>Author: {author.data.login}</Author>
+          <span>@{author.data.telegramLink}</span>
+        </div>
+      )}
       <p>id: {id}</p>
       <Title>
         <Link to={`/post/${id}`}>{title}</Link>
@@ -66,7 +77,6 @@ const Post: FC<TPostProps> = ({ id, data }) => {
         {isLikedByUser(userId, likedByIds) ? 'Unlike' : 'Like'} {likedByIds.length}
       </button>
       <CreatedAt>Created at: {creationDate}</CreatedAt>
-      <Author>Author id: {authorId}</Author>
     </PostContainer>
   );
 };
