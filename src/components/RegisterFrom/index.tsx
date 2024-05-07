@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import register from '@/firebase/actions/register';
 import { LOGIN_PAGE_ROUTE } from '@/router/routes';
+import isRegisterDataUnique from '@/utils/isRegisterDataUnique';
 
 // import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../UI/Button';
@@ -29,7 +30,9 @@ const RegisterForm = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await register({ login, email, telegramLink, password }, dispatch);
+    if (await isRegisterDataUnique(login, email)) {
+      await register({ login, email, telegramLink, password }, dispatch);
+    }
   };
 
   return (
