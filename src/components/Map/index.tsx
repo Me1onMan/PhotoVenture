@@ -18,9 +18,24 @@ const MAP_CONTAINER_ID = 'map-container';
 const Map = () => {
   const posts = usePosts();
 
+  const [map, setMap] = useState();
+  const [markers, setMarkers] = useState([]);
+
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredPosts, setFilteredPosts] = useState<TPostProps[]>(posts);
   const { types, emotions, access } = useSelector(selectFilterOptions);
+
+  useEffect(() => {
+    mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
+    const mapObj = new mapboxgl.Map({
+      container: MAP_CONTAINER_ID,
+      center: [27.561824, 53.902287],
+      zoom: 10,
+      style: 'mapbox://styles/mapbox/streets-v11',
+    });
+    mapObj.addControl(new mapboxgl.NavigationControl());
+    setMap(mapObj);
+  }, []);
 
   useEffect(() => {
     let tempPosts = posts;
@@ -38,27 +53,23 @@ const Map = () => {
   }, [posts, searchValue, types, emotions, access]);
 
   useEffect(() => {
-    mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
-    const map = new mapboxgl.Map({
-      container: MAP_CONTAINER_ID,
-      center: [27.561824, 53.902287],
-      zoom: 10,
-      style: 'mapbox://styles/mapbox/streets-v11',
-    });
-    map.addControl(new mapboxgl.NavigationControl());
-
     const addMapMarkers = () => {
-      filteredPosts.forEach((post) => {
+      const markersObj = filteredPosts.map((post) => {
         const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
           `<a href=${POSTS_PAGE_ROUTE}/${post.id}>link</a>`,
         );
 
-        new mapboxgl.Marker().setLngLat(post.data.geoCoordinates).setPopup(popup).addTo(map);
+        return new mapboxgl.Marker().setLngLat(post.data.geoCoordinates).setPopup(popup).addTo(map);
       });
+
+      setMarkers(markersObj);
     };
 
-    addMapMarkers();
-  }, [filteredPosts]);
+    if (map) {
+      if (markers.length > 0) markers.forEach((marker) => marker.remove());
+      addMapMarkers();
+    }
+  }, [map, filteredPosts]);
 
   return (
     <>
