@@ -6,6 +6,7 @@ import Button from '@/components/UI/Button';
 import addUserToGroup from '@/firebase/actions/addUserToGroup';
 import removeUserFromGroup from '@/firebase/actions/removeUserFromGroup';
 import usePhotoFromFirestore from '@/hooks/usePhotoFromFirestore';
+import { GROUPS_PAGE_ROUTE } from '@/router/routes';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
 
 import { Access, Description, GroupCardContainer, IconProfile, Title } from './styled';
@@ -44,7 +45,7 @@ const GroupCard: FC<TGroupCardProps> = ({ id, data }) => {
     <GroupCardContainer>
       <p>id: {id}</p>
       <Title>
-        <Link to={`/group/${id}`}>{title}</Link>
+        <Link to={`${GROUPS_PAGE_ROUTE}/${id}`}>{title}</Link>
       </Title>
       {photoLink && <IconProfile src={photo} alt={title} />}
       <Description>{description}</Description>
