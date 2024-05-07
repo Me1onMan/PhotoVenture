@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
 
 import usePosts from '@/hooks/usePosts';
+import { POSTS_PAGE_ROUTE } from '@/router/routes';
 import { selectFilterOptions } from '@/store/slices/filterOptionsSlice';
 import searchPosts from '@/utils/searchPosts';
 
@@ -49,7 +50,7 @@ const Map = () => {
     const addMapMarkers = () => {
       filteredPosts.forEach((post) => {
         const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-          `<a href=/post/${post.id}>link</a>`,
+          `<a href=${POSTS_PAGE_ROUTE}/${post.id}>link</a>`,
         );
 
         new mapboxgl.Marker().setLngLat(post.data.geoCoordinates).setPopup(popup).addTo(map);

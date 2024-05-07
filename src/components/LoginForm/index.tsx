@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { HOME_PAGE_ROUTE, REGISTRATION_PAGE_ROUTE } from '@/router/routes';
+import { POSTS_PAGE_ROUTE, REGISTRATION_PAGE_ROUTE } from '@/router/routes';
 import { AppDispatch } from '@/store';
 import { fetchUserByLogin } from '@/store/slices/activeUserSlice';
 
@@ -31,7 +31,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     dispatch(fetchUserByLogin({ login, password }));
-    navigate(HOME_PAGE_ROUTE);
+    navigate(POSTS_PAGE_ROUTE);
   };
 
   return (

@@ -9,9 +9,9 @@ import UsersPage from '@/pages/UsersPage';
 
 import {
   GROUPS_PAGE_ROUTE,
-  HOME_PAGE_ROUTE,
   LIKED_POSTS_PAGE_ROUTE,
   MAP_PAGE_ROUTE,
+  POSTS_PAGE_ROUTE,
   SINGLE_GROUP_ROUTE,
   SINGLE_POST_ROUTE,
   SINGLE_USER_ROUTE,
@@ -21,7 +21,7 @@ import { TRoute } from './types';
 
 const privateRoutes: Array<TRoute> = [
   {
-    path: HOME_PAGE_ROUTE,
+    path: POSTS_PAGE_ROUTE,
     element: HomePage,
   },
   {

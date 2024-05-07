@@ -1,11 +1,11 @@
 export const LOGIN_PAGE_ROUTE = '/login';
 export const REGISTRATION_PAGE_ROUTE = '/registration';
-export const HOME_PAGE_ROUTE = '/home';
+export const POSTS_PAGE_ROUTE = '/posts';
 export const LIKED_POSTS_PAGE_ROUTE = '/likedPosts';
-export const USERS_PAGE_ROUTE = '/users';
+export const SINGLE_POST_ROUTE = `${POSTS_PAGE_ROUTE}/:postId`;
 export const GROUPS_PAGE_ROUTE = '/groups';
-export const SINGLE_POST_ROUTE = '/post/:postId';
-export const SINGLE_GROUP_ROUTE = '/group/:groupId';
-export const SINGLE_USER_ROUTE = '/user/:userId';
+export const SINGLE_GROUP_ROUTE = `${GROUPS_PAGE_ROUTE}/:groupId`;
+export const USERS_PAGE_ROUTE = '/users';
+export const SINGLE_USER_ROUTE = `${USERS_PAGE_ROUTE}/:userId`;
 export const MAP_PAGE_ROUTE = '/map';
 export const NOT_FOUND_PAGE_ROUTE = '*';

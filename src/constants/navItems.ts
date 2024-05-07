@@ -1,8 +1,8 @@
 import {
   GROUPS_PAGE_ROUTE,
-  HOME_PAGE_ROUTE,
   LIKED_POSTS_PAGE_ROUTE,
   MAP_PAGE_ROUTE,
+  POSTS_PAGE_ROUTE,
   USERS_PAGE_ROUTE,
 } from '@/router/routes';
 
@@ -13,7 +13,7 @@ type TNavItem = {
 
 const navItems: Array<TNavItem> = [
   {
-    to: HOME_PAGE_ROUTE,
+    to: POSTS_PAGE_ROUTE,
     title: 'Home',
   },
   {
