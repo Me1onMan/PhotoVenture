@@ -18,6 +18,7 @@ import isAuthSlice from './slices/isAuthSlice';
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['filterOptions'],
 };
 
 const rootReducer = combineReducers({

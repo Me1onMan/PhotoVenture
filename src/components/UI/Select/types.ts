@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export type TOption = {
-  value: string | number;
-  title: string | number;
+  value: string;
+  title: string;
 };
 
 export type TSelectProps = {
