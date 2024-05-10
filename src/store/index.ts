@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import activeUserSlice from './slices/activeUserSlice';
 import filterOptionsSlice from './slices/filterOptionsSlice';
 import isAuthSlice from './slices/isAuthSlice';
+import themeSlice from './slices/themeSlice';
 
 const persistConfig = {
   key: 'root',
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   activeUser: activeUserSlice,
   isAuth: isAuthSlice,
   filterOptions: filterOptionsSlice,
+  theme: themeSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

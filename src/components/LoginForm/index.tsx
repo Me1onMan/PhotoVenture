@@ -10,6 +10,8 @@ import { fetchUserByLogin } from '@/store/slices/activeUserSlice';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
 
+import { FormStyled, HeaderLogin, LoginContainer } from './styled';
+
 // type TFormInput = {
 //   login: string;
 //   email: string;
@@ -35,9 +37,9 @@ const LoginForm = () => {
   };
 
   return (
-    <>
-      <h1>Login!</h1>
-      <form onSubmit={handleSubmit}>
+    <LoginContainer>
+      <HeaderLogin>Login!</HeaderLogin>
+      <FormStyled onSubmit={handleSubmit}>
         <Input value={login} setValue={setLogin} name="login" placeholder="Login" type="text" />
         <Input
           value={password}
@@ -47,9 +49,9 @@ const LoginForm = () => {
           type="password"
         />
         <Button type="submit">Login</Button>
-      </form>
+      </FormStyled>
       <NavLink to={REGISTRATION_PAGE_ROUTE}>To registration page</NavLink>
-    </>
+    </LoginContainer>
   );
 };
 
