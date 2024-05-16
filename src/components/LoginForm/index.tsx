@@ -2,13 +2,15 @@ import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { HOME_PAGE_ROUTE, REGISTRATION_PAGE_ROUTE } from '@/router/routes';
+import { POSTS_PAGE_ROUTE, REGISTRATION_PAGE_ROUTE } from '@/router/routes';
 import { AppDispatch } from '@/store';
 import { fetchUserByLogin } from '@/store/slices/activeUserSlice';
 
 // import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
+
+import { FormStyled, HeaderLogin, LoginContainer } from './styled';
 
 // type TFormInput = {
 //   login: string;
@@ -31,13 +33,13 @@ const LoginForm = () => {
     e.preventDefault();
 
     dispatch(fetchUserByLogin({ login, password }));
-    navigate(HOME_PAGE_ROUTE);
+    navigate(POSTS_PAGE_ROUTE);
   };
 
   return (
-    <>
-      <h1>Login!</h1>
-      <form onSubmit={handleSubmit}>
+    <LoginContainer>
+      <HeaderLogin>Login!</HeaderLogin>
+      <FormStyled onSubmit={handleSubmit}>
         <Input value={login} setValue={setLogin} name="login" placeholder="Login" type="text" />
         <Input
           value={password}
@@ -47,9 +49,9 @@ const LoginForm = () => {
           type="password"
         />
         <Button type="submit">Login</Button>
-      </form>
+      </FormStyled>
       <NavLink to={REGISTRATION_PAGE_ROUTE}>To registration page</NavLink>
-    </>
+    </LoginContainer>
   );
 };
 

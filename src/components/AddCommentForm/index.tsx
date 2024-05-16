@@ -7,6 +7,7 @@ import { selectActiveUser } from '@/store/slices/activeUserSlice';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
 
+import { ButtonContainer, FormStyled, InputContainer } from './styled';
 import { TProps } from './types';
 
 const AddCommentForm: FC<TProps> = ({ postId, commentsId }) => {
@@ -19,15 +20,19 @@ const AddCommentForm: FC<TProps> = ({ postId, commentsId }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input
-        value={comment}
-        setValue={setComment}
-        name="comment"
-        placeholder="Input your comment..."
-      />
-      <Button type="submit">Add comment</Button>
-    </form>
+    <FormStyled onSubmit={handleSubmit}>
+      <InputContainer>
+        <Input
+          value={comment}
+          setValue={setComment}
+          name="comment"
+          placeholder="Напишите свой комментарий..."
+        />
+      </InputContainer>
+      <ButtonContainer>
+        <Button type="submit">Опубликовать</Button>
+      </ButtonContainer>
+    </FormStyled>
   );
 };
 

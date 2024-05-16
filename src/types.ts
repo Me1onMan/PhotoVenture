@@ -13,9 +13,22 @@ export type TUser = {
 export type TUserWOPassword = Omit<TUser, 'password'>;
 export type TUserRegistraton = Omit<TUser, 'id' | 'token'>;
 
-export type TEmotions = 'happiness' | 'sadness' | 'love' | 'hate' | 'joy' | 'surprise' | '';
+export type TEmotions =
+  | 'Страх'
+  | 'Злость'
+  | 'Отвращение'
+  | 'Печаль'
+  | 'Стыд'
+  | 'Вина'
+  | 'Нежность'
+  | 'Радость'
+  | 'Удовлетворение'
+  | 'Интерес'
+  | 'Удивление'
+  | 'Благодарность'
+  | '';
 
-export type TPostTypes = 'nature' | 'architecture' | 'occasion' | 'event' | 'item' | '';
+export type TPostTypes = 'Природа' | 'Архитектура' | 'Случайность' | 'Событие' | 'Предмет' | '';
 
 export type TPost = {
   id: string;

@@ -16,19 +16,19 @@ const filterOptionsSlice = createSlice({
       state.types.push(action.payload);
     },
     removeType: (state, action: PayloadAction<TPostTypes>) => {
-      state.types.filter((postType) => postType !== action.payload);
+      state.types = state.types.filter((postType) => postType !== action.payload);
     },
     addEmotion: (state, action: PayloadAction<TEmotions>) => {
       state.emotions.push(action.payload);
     },
     removeEmotion: (state, action: PayloadAction<TEmotions>) => {
-      state.emotions.filter((emotion) => emotion !== action.payload);
+      state.emotions = state.emotions.filter((emotion) => emotion !== action.payload);
     },
     addAccess: (state, action: PayloadAction<string>) => {
       state.access.push(action.payload);
     },
     removeAccess: (state, action: PayloadAction<string>) => {
-      state.access.filter((accessWord) => accessWord !== action.payload);
+      state.access = state.access.filter((accessWord) => accessWord !== action.payload);
     },
   },
 });

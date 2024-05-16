@@ -11,6 +11,8 @@ import FileInput from '../UI/FileInput';
 import Input from '../UI/Input';
 import Select from '../UI/Select';
 
+import FormStyled from './styled';
+
 const AddGroupForm: FC = () => {
   const { id: ownerId } = useSelector(selectActiveUser);
 
@@ -51,28 +53,28 @@ const AddGroupForm: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input value={title} setValue={setTitle} name="title" placeholder="Title" />
+    <FormStyled onSubmit={handleSubmit}>
+      <Input value={title} setValue={setTitle} name="title" placeholder="Название" />
       <Input
         value={description}
         setValue={setDescription}
         name="description"
-        placeholder="Description"
+        placeholder="Описание"
       />
       <Select
         selectedValue={access}
         setSelectedValue={setAccess}
         options={[
-          { value: 'public', title: 'public' },
-          { value: 'private', title: 'private' },
+          { value: 'public', title: 'Открытая' },
+          { value: 'private', title: 'Закрытая' },
         ]}
-        placeholder="Access"
+        placeholder="Доступ"
       />
       <FileInput file={file} setFile={setFile} />
       <Button type="submit" disabled={isLoading}>
-        {isLoading ? 'Creating...' : 'Create group'}
+        {isLoading ? 'Создаём...' : 'Создать'}
       </Button>
-    </form>
+    </FormStyled>
   );
 };
 

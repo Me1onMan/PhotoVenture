@@ -18,7 +18,7 @@ const withModalWrapper = <P extends object>(
       <ModalWrapper onClick={closeOnOutsideClick}>
         <ModalContainer>
           <WrappedComponent {...(props as P)} />
-          <Button onClick={closeModal}>Close</Button>
+          <Button onClick={closeModal}>Закрыть</Button>
         </ModalContainer>
       </ModalWrapper>
     );

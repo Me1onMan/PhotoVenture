@@ -1,9 +1,14 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
+import heartFilled from '@/../public/icons/heart-filled.svg';
+import heartOutlined from '@/../public/icons/heart-outlined.svg';
 import likePost from '@/firebase/actions/likePost';
+import useGroupName from '@/hooks/useGroupName';
 import usePhotosFromFirestore from '@/hooks/usePhotosFromFirestore';
+import useUser from '@/hooks/useUser';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
+import formatDate from '@/utils/formatDate';
 import isLikedByUser from '@/utils/isLikedByUser';
 
 import AddCommentForm from '../AddCommentForm';
@@ -13,12 +18,20 @@ import {
   Access,
   Advices,
   Author,
+  AuthotInfo,
+  BottomSection,
+  Container,
   CreatedAt,
   Description,
   Emotion,
+  FilterSection,
   GeoCoordinates,
+  LikeButton,
+  LikeIcon,
+  PhotosContainer,
   PostContainer,
   PostType,
+  Telegram,
   Title,
 } from './styled';
 import { TProps } from './types';
@@ -43,6 +56,11 @@ const SinglePost: FC<TProps> = ({ id, data }) => {
 
   const { id: userId } = useSelector(selectActiveUser);
 
+  const [author, isAuthorLoading] = useUser(authorId);
+  const [groupName, isLoadingGroup] = useGroupName(access);
+
+  const creationDate = formatDate(createdAt.toDate());
+
   const handleLike = async () => {
     const newLikedByIds = isLikedByUser(userId, likedByIds)
       ? likedByIds.filter((likedById) => likedById !== userId)
@@ -52,24 +70,46 @@ const SinglePost: FC<TProps> = ({ id, data }) => {
   };
 
   return (
-    <PostContainer>
-      <p>postId: {id}</p>
-      <Title>{title}</Title>
-      {photos.length > 0 && photos.map((photo) => <img key={photo} src={photo} alt="Post file" />)}
-      <Description>{description}</Description>
-      <Emotion>Emotion: {emotion}</Emotion>
-      <PostType>Type: {postType}</PostType>
-      <Advices>Advices: {advices}</Advices>
-      <Access>Access: {access}</Access>
-      <GeoCoordinates>Geo coordinates: {geoCoordinates}</GeoCoordinates>
-      <CreatedAt>Created at: {createdAt.toDate().toString()}</CreatedAt>
-      <Author>Author id: {authorId}</Author>
-      <button type="button" onClick={handleLike}>
-        {isLikedByUser(userId, likedByIds) ? 'Unlike' : 'Like'} {likedByIds.length}
-      </button>
+    <Container>
+      <PostContainer>
+        {isAuthorLoading ? (
+          <h4>Loading author...</h4>
+        ) : (
+          <>
+            <AuthotInfo>
+              <Author>{author.data.login}</Author>
+              <Telegram>@{author.data.telegramLink}</Telegram>
+            </AuthotInfo>
+            <CreatedAt>{creationDate}</CreatedAt>
+          </>
+        )}
+        <Title>{title}</Title>
+        <FilterSection>
+          <PostType>{postType}</PostType>
+          <Emotion>{emotion}</Emotion>
+        </FilterSection>
+        <PhotosContainer>
+          {photos.length > 0 &&
+            photos.map((photo) => <img key={photo} src={photo} alt="Post file" />)}
+        </PhotosContainer>{' '}
+        <Description>{description}</Description>
+        <Advices>Advices: {advices}</Advices>
+        <BottomSection>
+          <LikeButton type="button" onClick={handleLike}>
+            {isLikedByUser(userId, likedByIds) ? (
+              <LikeIcon src={heartFilled} alt="heart outlined" title="Больше не нравится" />
+            ) : (
+              <LikeIcon src={heartOutlined} alt="heart filled" title="Нравится" />
+            )}{' '}
+            {likedByIds.length}
+          </LikeButton>
+          <GeoCoordinates>{geoCoordinates}</GeoCoordinates>
+          <Access>{isLoadingGroup ? 'Грузим...' : groupName}</Access>
+        </BottomSection>
+      </PostContainer>
       <AddCommentForm postId={id} commentsId={commentsId} />
       <Comments commentsId={commentsId} />
-    </PostContainer>
+    </Container>
   );
 };
 

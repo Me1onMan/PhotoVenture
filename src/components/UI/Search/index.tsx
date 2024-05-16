@@ -1,6 +1,6 @@
 import { ChangeEvent, FC } from 'react';
 
-import StyledSearch from './styled';
+import { ClearButton, StyledSearch, Wrapper } from './styled';
 import { TSearchProps } from './types';
 
 const Search: FC<TSearchProps> = ({ value, setValue, name, placeholder = '' }) => {
@@ -8,8 +8,15 @@ const Search: FC<TSearchProps> = ({ value, setValue, name, placeholder = '' }) =
     setValue(e.target.value);
   };
 
+  const handleClear = () => {
+    setValue('');
+  };
+
   return (
-    <StyledSearch value={value} onChange={handleChange} name={name} placeholder={placeholder} />
+    <Wrapper>
+      <StyledSearch value={value} onChange={handleChange} name={name} placeholder={placeholder} />
+      {value && <ClearButton onClick={handleClear}>X</ClearButton>}
+    </Wrapper>
   );
 };
 

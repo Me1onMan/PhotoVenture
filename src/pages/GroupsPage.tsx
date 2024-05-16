@@ -26,7 +26,7 @@ const GroupsPage = () => {
     <>
       <Navbar />
       {/* <AddGroupForm /> */}
-      <CreateButton onClick={openModal}>+</CreateButton>
+      <CreateButton onClick={openModal} />
 
       <GroupsContainer />
       {isModalOpen && createPortal(<AddModal />, MODAL)}

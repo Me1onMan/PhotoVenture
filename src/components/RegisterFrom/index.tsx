@@ -4,10 +4,13 @@ import { NavLink } from 'react-router-dom';
 
 import register from '@/firebase/actions/register';
 import { LOGIN_PAGE_ROUTE } from '@/router/routes';
+import isRegisterDataUnique from '@/utils/isRegisterDataUnique';
 
 // import { SubmitHandler, useForm } from 'react-hook-form';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
+
+import { Container, FormStyled, RegisterHeader } from './styled';
 
 // type TFormInput = {
 //   login: string;
@@ -29,13 +32,15 @@ const RegisterForm = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await register({ login, email, telegramLink, password }, dispatch);
+    if (await isRegisterDataUnique(login, email)) {
+      await register({ login, email, telegramLink, password }, dispatch);
+    }
   };
 
   return (
-    <>
-      <h1>Registration!</h1>
-      <form onSubmit={handleSubmit}>
+    <Container>
+      <RegisterHeader>Registration!</RegisterHeader>
+      <FormStyled onSubmit={handleSubmit}>
         <Input value={login} setValue={setLogin} name="login" placeholder="Login" type="text" />
         <Input value={email} setValue={setEmail} name="email" placeholder="Email" type="email" />
         <Input
@@ -53,9 +58,9 @@ const RegisterForm = () => {
           type="password"
         />
         <Button type="submit">Register</Button>
-      </form>
+      </FormStyled>
       <NavLink to={LOGIN_PAGE_ROUTE}>To login page</NavLink>
-    </>
+    </Container>
   );
 };
 

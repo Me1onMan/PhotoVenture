@@ -27,11 +27,13 @@ const HomePage: FC = () => {
   return (
     <>
       <Navbar />
-      <CreateButton onClick={openModal}>+</CreateButton>
       <PostsContainer posts={posts} />
+      <CreateButton onClick={openModal} />
       {isModalOpen && createPortal(<AddModal />, MODAL)}
     </>
   );
 };
+
+// const readyComponent = withPageWrapper(HomePage);
 
 export default HomePage;

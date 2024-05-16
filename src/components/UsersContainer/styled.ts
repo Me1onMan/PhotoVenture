@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 
-export const UsersStyledContainer = styled.div``;
+export const SearchSection = styled.div`
+  height: 80px;
 
-export const ComponentForDelete = styled.div``;
+  display: flex;
+
+  padding: 20px 60px;
+`;
+
+export const Container = styled.div`
+  display: grid;
+  justify-content: center;
+
+  gap: 24px;
+`;

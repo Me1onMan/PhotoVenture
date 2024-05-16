@@ -1,5 +1,11 @@
 import { TPostTypes } from '@/types';
 
-const POST_TYPES: Array<TPostTypes> = ['architecture', 'event', 'item', 'nature', 'occasion'];
+const POST_TYPES: Array<TPostTypes> = [
+  'Архитектура',
+  'Предмет',
+  'Природа',
+  'Случайность',
+  'Событие',
+];
 
 export default POST_TYPES;
