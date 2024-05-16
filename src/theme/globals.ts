@@ -9,8 +9,13 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Montserrat', sans-serif;
     }
 
+    body {
+        background-color: ${({ theme }) => theme.backgroundPrimary};
+    }
+
     a {
         text-decoration: none;
+        color: ${({ theme }) => theme.linkPrimary};
     }
 
     button {

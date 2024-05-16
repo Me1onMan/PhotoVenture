@@ -10,7 +10,7 @@ import Search from '../UI/Search';
 
 import { TPostProps } from './Post/types';
 import Post from './Post';
-import { Container } from './styled';
+import { Container, SearchSection } from './styled';
 import { TPostsContainerProps } from './types';
 
 const PostsContainer: FC<TPostsContainerProps> = ({ posts }) => {
@@ -36,13 +36,15 @@ const PostsContainer: FC<TPostsContainerProps> = ({ posts }) => {
 
   return (
     <>
-      <Search
-        value={searchValue}
-        setValue={setSearchValue}
-        name="postsSearch"
-        placeholder="Search in posts"
-      />
-      <PostsFilterControl />
+      <SearchSection>
+        <Search
+          value={searchValue}
+          setValue={setSearchValue}
+          name="postsSearch"
+          placeholder="Искать в публикациях"
+        />
+        <PostsFilterControl />
+      </SearchSection>
       <Container>
         {filteredPosts.length > 0 &&
           filteredPosts.map((post) => <Post key={post.id} id={post.id} data={post.data} />)}

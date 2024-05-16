@@ -5,9 +5,9 @@ import { addAccess, removeAccess } from '@/store/slices/filterOptionsSlice';
 
 import { TProps } from './types';
 
-const AccessElement: FC<TProps> = ({ groupId, groupName }) => {
+const AccessElement: FC<TProps> = ({ groupId, groupName, isSelected }) => {
   const dispatch = useDispatch();
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<boolean>(isSelected);
 
   const handleToggle = () => {
     if (isChecked) {

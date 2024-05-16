@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LoginContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +15,7 @@ export const LoginContainer = styled.div`
   }
 `;
 
-export const HeaderLogin = styled.h1`
+export const RegisterHeader = styled.h1`
   margin-bottom: 32px;
 
   font-size: 48px;

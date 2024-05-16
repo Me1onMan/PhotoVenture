@@ -16,6 +16,7 @@ import Select from '../UI/Select';
 import { TOption } from '../UI/Select/types';
 
 import ModalMap from './ModalMap';
+import { CoordinatesContainer, FormStyled, SelectContainer } from './styled';
 
 const modalContainer = document.getElementById('modal');
 
@@ -99,62 +100,66 @@ const AddPostForm: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input value={title} setValue={setTitle} name="title" placeholder="Title" />
+    <FormStyled onSubmit={handleSubmit}>
+      <Input value={title} setValue={setTitle} name="title" placeholder="Заголовок" />
       <Input
         value={description}
         setValue={setDescription}
         name="description"
-        placeholder="Description"
+        placeholder="Описание"
       />
-      <Input value={advices} setValue={setAdvices} name="advices" placeholder="Advices" />
-      <Input
-        value={latitude}
-        setValue={setLatitude}
-        name="latitude"
-        placeholder="Latitude"
-        type="number"
-      />
-      <Input
-        value={longitude}
-        setValue={setLongitude}
-        name="longitude"
-        placeholder="Longitude"
-        type="number"
-      />
-      <Button onClick={openModalMap}>Select on map</Button>
-      <Select
-        selectedValue={emotion}
-        setSelectedValue={setEmotion}
-        options={EMOTIONS.map((emotionEl) => ({ value: emotionEl, title: emotionEl }))}
-        placeholder="Emotion"
-      />
-      <Select
-        selectedValue={postType}
-        setSelectedValue={setPostType}
-        options={POST_TYPES.map((typeEl) => ({ value: typeEl, title: typeEl }))}
-        placeholder="Post type"
-      />
-      <Select
-        selectedValue={access}
-        setSelectedValue={setAccess}
-        options={[
-          { value: 'public', title: 'public' },
-          { value: 'private', title: 'private' },
-          ...groupsOptions,
-        ]}
-        placeholder="Access"
-      />
+      <Input value={advices} setValue={setAdvices} name="advices" placeholder="Советы" />
+      <SelectContainer>
+        <Select
+          selectedValue={emotion}
+          setSelectedValue={setEmotion}
+          options={EMOTIONS.map((emotionEl) => ({ value: emotionEl, title: emotionEl }))}
+          placeholder="Эмоция"
+        />
+        <Select
+          selectedValue={postType}
+          setSelectedValue={setPostType}
+          options={POST_TYPES.map((typeEl) => ({ value: typeEl, title: typeEl }))}
+          placeholder="Тип записи"
+        />
+        <Select
+          selectedValue={access}
+          setSelectedValue={setAccess}
+          options={[
+            { value: 'public', title: 'public' },
+            { value: 'private', title: 'private' },
+            ...groupsOptions,
+          ]}
+          placeholder="Доступ"
+        />
+      </SelectContainer>
+      <CoordinatesContainer>
+        <Input
+          value={latitude}
+          setValue={setLatitude}
+          name="latitude"
+          placeholder="Широта"
+          type="number"
+        />
+        <Input
+          value={longitude}
+          setValue={setLongitude}
+          name="longitude"
+          placeholder="Долгота"
+          type="number"
+        />
+        <Button onClick={openModalMap}>На карте</Button>
+      </CoordinatesContainer>
       <MultipleFileInput files={files} setFiles={setFiles} />
       <Button type="submit" disabled={isLoading}>
-        Create post
+        Создать публикацию
       </Button>
       {isShowModal &&
         createPortal(
           <ModalMap closeModal={closeModalMap} setLat={setLatitude} setLng={setLongitude} />,
           modalContainer,
         )}
-    </form>
+    </FormStyled>
   );
 };
 

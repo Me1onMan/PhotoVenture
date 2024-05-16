@@ -23,10 +23,9 @@ const ModalMap: FC<TModalMapProps> = ({ closeModal, setLat, setLng }) => {
   return (
     <ModalWrapper onClick={closeOnOutsideClick}>
       <ModalContainer>
-        <h1>Modal window!</h1>
         <Map setLng={setLngLocal} setLat={setLatLocal} />
-        <Button onClick={closeModal}>Close</Button>
-        <Button onClick={handleApply}>Apply</Button>
+        <Button onClick={handleApply}>Выбрать</Button>
+        <Button onClick={closeModal}>Закрыть</Button>
       </ModalContainer>
     </ModalWrapper>
   );

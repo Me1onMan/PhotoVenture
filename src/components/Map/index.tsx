@@ -11,7 +11,7 @@ import { TPostProps } from '../PostsContainer/Post/types';
 import PostsFilterControl from '../UI/PostsFilterControl';
 import Search from '../UI/Search';
 
-import { MapContainer } from './styled';
+import { MapContainer, MapWrapper, SearchSection } from './styled';
 
 const MAP_CONTAINER_ID = 'map-container';
 
@@ -56,7 +56,12 @@ const Map = () => {
     const addMapMarkers = () => {
       const markersObj = filteredPosts.map((post) => {
         const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-          `<a href=${POSTS_PAGE_ROUTE}/${post.id}>link</a>`,
+          `
+          <h1>
+            <a href=${POSTS_PAGE_ROUTE}/${post.id}>${post.data.title}</a>
+          </h1>
+          <p>${post.data.description}<p>
+          `,
         );
 
         return new mapboxgl.Marker().setLngLat(post.data.geoCoordinates).setPopup(popup).addTo(map);
@@ -73,14 +78,18 @@ const Map = () => {
 
   return (
     <>
-      <Search
-        value={searchValue}
-        setValue={setSearchValue}
-        name="postsSearch"
-        placeholder="Search in posts"
-      />
-      <PostsFilterControl />
-      <MapContainer id={MAP_CONTAINER_ID} />
+      <SearchSection>
+        <Search
+          value={searchValue}
+          setValue={setSearchValue}
+          name="postsSearch"
+          placeholder="Искать в публикациях"
+        />
+        <PostsFilterControl />
+      </SearchSection>
+      <MapWrapper>
+        <MapContainer id={MAP_CONTAINER_ID} />
+      </MapWrapper>
     </>
   );
 };

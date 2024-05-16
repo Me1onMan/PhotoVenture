@@ -20,10 +20,9 @@ const Navbar = () => {
   return (
     <Nav>
       <NavList>
-        <NavItem>
-          {navItems.map(({ to, title }) => (
+        {navItems.map(({ to, title }) => (
+          <NavItem key={to}>
             <NavLink
-              key={to}
               to={to}
               className={({ isActive, isPending }) => {
                 if (isPending) return 'pending';
@@ -33,11 +32,11 @@ const Navbar = () => {
             >
               {title}
             </NavLink>
-          ))}
-        </NavItem>
+          </NavItem>
+        ))}
       </NavList>
       <Button type="button" onClick={handleLogout}>
-        Logout
+        Выйти
       </Button>
     </Nav>
   );

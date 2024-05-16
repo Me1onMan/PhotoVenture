@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ModalWrapper = styled.div`
+  z-index: 10;
   position: fixed;
   left: 0;
   top: 0;
@@ -16,7 +17,7 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  width: 70vw;
+  width: 80vw;
   height: 80vh;
 
   display: flex;
@@ -24,5 +25,15 @@ export const ModalContainer = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  background-color: goldenrod;
+  padding: 20px;
+
+  border-radius: 10px;
+
+  background-color: ${({ theme }) => theme.backgroundSecondary};
+
+  & > button {
+    margin-top: 20px;
+
+    max-width: 300px;
+  }
 `;

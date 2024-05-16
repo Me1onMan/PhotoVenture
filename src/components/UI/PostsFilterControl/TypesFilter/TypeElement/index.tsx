@@ -5,9 +5,9 @@ import { addType, removeType } from '@/store/slices/filterOptionsSlice';
 
 import { TProps } from './types';
 
-const TypeElement: FC<TProps> = ({ postType }) => {
+const TypeElement: FC<TProps> = ({ postType, isSelected }) => {
   const dispatch = useDispatch();
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<boolean>(isSelected);
 
   const handleToggle = () => {
     if (isChecked) {

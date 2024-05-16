@@ -5,9 +5,9 @@ import { addEmotion, removeEmotion } from '@/store/slices/filterOptionsSlice';
 
 import { TProps } from './types';
 
-const EmotionElement: FC<TProps> = ({ emotion }) => {
+const EmotionElement: FC<TProps> = ({ emotion, isSelected }) => {
   const dispatch = useDispatch();
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<boolean>(isSelected);
 
   const handleToggle = () => {
     if (isChecked) {

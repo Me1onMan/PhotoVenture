@@ -10,6 +10,8 @@ import isRegisterDataUnique from '@/utils/isRegisterDataUnique';
 import Button from '../UI/Button';
 import Input from '../UI/Input';
 
+import { Container, FormStyled, RegisterHeader } from './styled';
+
 // type TFormInput = {
 //   login: string;
 //   email: string;
@@ -36,9 +38,9 @@ const RegisterForm = () => {
   };
 
   return (
-    <>
-      <h1>Registration!</h1>
-      <form onSubmit={handleSubmit}>
+    <Container>
+      <RegisterHeader>Registration!</RegisterHeader>
+      <FormStyled onSubmit={handleSubmit}>
         <Input value={login} setValue={setLogin} name="login" placeholder="Login" type="text" />
         <Input value={email} setValue={setEmail} name="email" placeholder="Email" type="email" />
         <Input
@@ -56,9 +58,9 @@ const RegisterForm = () => {
           type="password"
         />
         <Button type="submit">Register</Button>
-      </form>
+      </FormStyled>
       <NavLink to={LOGIN_PAGE_ROUTE}>To login page</NavLink>
-    </>
+    </Container>
   );
 };
 

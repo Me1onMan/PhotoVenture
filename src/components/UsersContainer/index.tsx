@@ -6,7 +6,7 @@ import searchUsers from '@/utils/searchUsers';
 import Search from '../UI/Search';
 
 import { TUserCardProps } from './UserCard/types';
-import { UsersStyledContainer } from './styled';
+import { Container, SearchSection } from './styled';
 import UserCard from './UserCard';
 
 const UsersContianer = () => {
@@ -19,18 +19,21 @@ const UsersContianer = () => {
   }, [users, searchValue]);
 
   return (
-    <UsersStyledContainer>
-      <h1>Users Page</h1>
-      <Search
-        value={searchValue}
-        setValue={setSearchValue}
-        name="usersSearch"
-        placeholder="Search in users"
-      />
-      {filteredUsers.map(({ id, data }) => (
-        <UserCard key={id} id={id} data={data} />
-      ))}
-    </UsersStyledContainer>
+    <>
+      <SearchSection>
+        <Search
+          value={searchValue}
+          setValue={setSearchValue}
+          name="usersSearch"
+          placeholder="Искать по пользователям"
+        />
+      </SearchSection>
+      <Container>
+        {filteredUsers.map(({ id, data }) => (
+          <UserCard key={id} id={id} data={data} />
+        ))}
+      </Container>
+    </>
   );
 };
 

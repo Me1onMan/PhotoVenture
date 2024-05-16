@@ -8,6 +8,7 @@ import { TOption } from '../Select/types';
 
 import AccessFilter from './AccessFilter';
 import EmotionsFilter from './EmotionsFilter';
+import FiltersButtonContainer from './styled';
 import TypesFilter from './TypesFilter';
 
 const PostsFilterControl = () => {
@@ -27,11 +28,11 @@ const PostsFilterControl = () => {
   }, [authorId]);
 
   return (
-    <>
+    <FiltersButtonContainer>
       <TypesFilter />
       <EmotionsFilter />
       <AccessFilter groupsOptions={groupsOptions} />
-    </>
+    </FiltersButtonContainer>
   );
 };
 

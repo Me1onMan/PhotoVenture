@@ -2,22 +2,34 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import heartFilled from '@/../public/icons/heart-filled.svg';
+import heartOutlined from '@/../public/icons/heart-outlined.svg';
 import likePost from '@/firebase/actions/likePost';
+import useGroupName from '@/hooks/useGroupName';
 import usePhotosFromFirestore from '@/hooks/usePhotosFromFirestore';
 import useUser from '@/hooks/useUser';
+import { POSTS_PAGE_ROUTE } from '@/router/routes';
 import { selectActiveUser } from '@/store/slices/activeUserSlice';
+import formatDate from '@/utils/formatDate';
 import isLikedByUser from '@/utils/isLikedByUser';
 
 import {
   Access,
-  Advices,
   Author,
+  AuthorInfo,
+  BottomSection,
   CreatedAt,
   Description,
   Emotion,
+  FilterSection,
   GeoCoordinates,
+  LikeButton,
+  LikeIcon,
+  Photo,
+  PhotosContainer,
   PostContainer,
   PostType,
+  Telegram,
   Title,
 } from './styled';
 import { TPostProps } from './types';
@@ -29,18 +41,19 @@ const Post: FC<TPostProps> = ({ id, data }) => {
     photoLinks,
     emotion,
     postType,
-    advices,
     access,
     authorId,
     geoCoordinates,
     createdAt,
     likedByIds,
   } = data;
-  const creationDate = createdAt.toDate().toString();
+
+  const creationDate = formatDate(createdAt.toDate());
 
   const photos = usePhotosFromFirestore(photoLinks);
 
   const { id: userId } = useSelector(selectActiveUser);
+  const [groupName, isLoadingGroup] = useGroupName(access);
 
   const [author, isAuthorLoading] = useUser(authorId);
 
@@ -57,26 +70,39 @@ const Post: FC<TPostProps> = ({ id, data }) => {
       {isAuthorLoading ? (
         <h4>Loading author...</h4>
       ) : (
-        <div>
-          <Author>Author: {author.data.login}</Author>
-          <span>@{author.data.telegramLink}</span>
-        </div>
+        <>
+          <AuthorInfo>
+            <Author>{author.data.login}</Author>
+            <Telegram>@{author.data.telegramLink}</Telegram>
+          </AuthorInfo>
+          <CreatedAt>{creationDate}</CreatedAt>
+        </>
       )}
-      <p>id: {id}</p>
       <Title>
-        <Link to={`/post/${id}`}>{title}</Link>
+        <Link to={`${POSTS_PAGE_ROUTE}/${id}`}>{title}</Link>
       </Title>
-      {photos.length > 0 && photos.map((photo) => <img key={photo} src={photo} alt="Post file" />)}
+      <FilterSection>
+        <PostType>{postType}</PostType>
+        <Emotion>{emotion}</Emotion>
+      </FilterSection>
+      <PhotosContainer>
+        {photos.length > 0 &&
+          photos.map((photo) => <Photo key={photo} src={photo} alt="Post file" />)}
+      </PhotosContainer>
       <Description>{description}</Description>
-      <Emotion>Emotion: {emotion}</Emotion>
-      <PostType>Type: {postType}</PostType>
-      <Advices>Advices: {advices}</Advices>
-      <Access>Access: {access}</Access>
-      <GeoCoordinates>Geo coordinates: {geoCoordinates}</GeoCoordinates>
-      <button type="button" onClick={handleLike}>
-        {isLikedByUser(userId, likedByIds) ? 'Unlike' : 'Like'} {likedByIds.length}
-      </button>
-      <CreatedAt>Created at: {creationDate}</CreatedAt>
+      {/* <Advices>Advices: {advices}</Advices> */}
+      <BottomSection>
+        <LikeButton type="button" onClick={handleLike}>
+          {isLikedByUser(userId, likedByIds) ? (
+            <LikeIcon src={heartFilled} alt="heart outlined" title="Больше не нравится" />
+          ) : (
+            <LikeIcon src={heartOutlined} alt="heart filled" title="Нравится" />
+          )}{' '}
+          {likedByIds.length}
+        </LikeButton>
+        <GeoCoordinates>{geoCoordinates}</GeoCoordinates>
+        <Access>{isLoadingGroup ? 'Грузим...' : groupName}</Access>
+      </BottomSection>
     </PostContainer>
   );
 };

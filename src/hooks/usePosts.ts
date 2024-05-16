@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { collection, onSnapshot, query } from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 
 import { TPostProps } from '@/components/PostsContainer/Post/types';
 import { database } from '@/firebase';
@@ -9,7 +9,7 @@ const usePosts = () => {
   const [posts, setPosts] = useState<Array<TPostProps>>([]);
 
   useEffect(() => {
-    const q = query(collection(database, POSTS_COLLECTION));
+    const q = query(collection(database, POSTS_COLLECTION), orderBy('createdAt', 'desc'));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const docsSnapshot = querySnapshot.docs.map(
         (doc) =>

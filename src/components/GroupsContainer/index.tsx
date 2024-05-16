@@ -7,7 +7,7 @@ import Search from '../UI/Search';
 
 import { TGroupCardProps } from './GroupCard/types';
 import GroupCard from './GroupCard';
-import { GroupsStyledContainer } from './styled';
+import { Container, SearchSection } from './styled';
 
 const GroupsContainer = () => {
   const groups = useGroups();
@@ -20,17 +20,19 @@ const GroupsContainer = () => {
 
   return (
     <>
-      <Search
-        value={searchValue}
-        setValue={setSearchValue}
-        name="groupsSearch"
-        placeholder="Search in groups"
-      />
-      <GroupsStyledContainer>
+      <SearchSection>
+        <Search
+          value={searchValue}
+          setValue={setSearchValue}
+          name="groupsSearch"
+          placeholder="Искать по группам"
+        />
+      </SearchSection>
+      <Container>
         {filteredGroups.map(({ id, data }) => (
           <GroupCard key={id} id={id} data={data} />
         ))}
-      </GroupsStyledContainer>
+      </Container>
     </>
   );
 };

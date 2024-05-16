@@ -14,23 +14,23 @@ type TNavItem = {
 const navItems: Array<TNavItem> = [
   {
     to: POSTS_PAGE_ROUTE,
-    title: 'Home',
+    title: 'Главная',
   },
   {
     to: GROUPS_PAGE_ROUTE,
-    title: 'Groups',
+    title: 'Группы',
   },
   {
     to: USERS_PAGE_ROUTE,
-    title: 'Users',
+    title: 'Пользователи',
   },
   {
     to: MAP_PAGE_ROUTE,
-    title: 'Map',
+    title: 'Карта',
   },
   {
     to: LIKED_POSTS_PAGE_ROUTE,
-    title: 'Likes',
+    title: 'Лайки',
   },
 ];
 

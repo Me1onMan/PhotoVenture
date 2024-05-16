@@ -1,7 +1,31 @@
 import styled from 'styled-components';
 
-export const Nav = styled.nav``;
+export const Nav = styled.nav`
+  display: flex;
+  justify-content: space-between;
 
-export const NavList = styled.ul``;
+  padding: 20px 60px;
 
-export const NavItem = styled.li``;
+  background-color: ${({ theme }) => theme.backgroundSecondary};
+
+  & button {
+    max-width: 200px;
+  }
+`;
+
+export const NavList = styled.ul`
+  list-style: none;
+
+  display: flex;
+  gap: 20px;
+`;
+
+export const NavItem = styled.li`
+  display: flex;
+  align-items: center;
+
+  & a {
+    font-size: 24px;
+    font-weight: 700;
+  }
+`;
