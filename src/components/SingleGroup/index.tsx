@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { MODAL } from '@/constants/cotainersId';
 import addUserToGroup from '@/firebase/actions/addUserToGroup';
@@ -93,7 +94,9 @@ const SingleGroup: FC<TProps> = ({ id, data }) => {
                 <h4>Loading author...</h4>
               ) : (
                 <OwnerInfo>
-                  <Owner>{author.data.login}</Owner>
+                  <Link to={`/users/${ownerId}`}>
+                    <Owner>{author.data.login}</Owner>
+                  </Link>
                   <Telegram>@{author.data.telegramLink}</Telegram>
                 </OwnerInfo>
               )}

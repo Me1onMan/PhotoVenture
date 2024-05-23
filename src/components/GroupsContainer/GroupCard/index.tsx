@@ -72,7 +72,9 @@ const GroupCard: FC<TGroupCardProps> = ({ id, data }) => {
             <h4>Loading author...</h4>
           ) : (
             <OwnerInfo>
-              <Owner>{author.data.login}</Owner>
+              <Link to={`/users/${ownerId}`}>
+                <Owner>{author.data.login}</Owner>
+              </Link>
               <Telegram>@{author.data.telegramLink}</Telegram>
             </OwnerInfo>
           )}

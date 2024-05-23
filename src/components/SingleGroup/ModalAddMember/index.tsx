@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Search from '@/components/UI/Search';
 import { TUserCardProps } from '@/components/UsersContainer/UserCard/types';
@@ -39,7 +40,9 @@ const ModalAddMember: FC<TModalAddMembersProps> = ({ groupId, membersId }) => {
         {filteredUsers.length > 0 &&
           filteredUsers.map((user) => (
             <UserContainer key={user.id}>
-              <Login>{user.data.login}</Login>
+              <Link to={`/users/${user.id}`} target="_blank">
+                <Login>{user.data.login}</Login>
+              </Link>
               <AddRemoveButton type="button" onClick={handleAddRemoveClick(user.id)}>
                 {membersId.includes(user.id) ? 'Remove' : 'Add'}
               </AddRemoveButton>

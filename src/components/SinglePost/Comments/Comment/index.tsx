@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import useUser from '@/hooks/useUser';
 import formatDate from '@/utils/formatDate';
@@ -18,7 +19,9 @@ const Comment: FC<TCommentProps> = ({ data }) => {
       ) : (
         <>
           <AuthotInfo>
-            <Author>{author.data.login}</Author>
+            <Author>
+              <Link to={`/users/${authorId}`}>{author.data.login}</Link>
+            </Author>
             <Telegram>@{author.data.telegramLink}</Telegram>
           </AuthotInfo>
           <CreatedAt>{creationDate}</CreatedAt>

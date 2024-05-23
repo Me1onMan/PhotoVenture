@@ -72,7 +72,9 @@ const Post: FC<TPostProps> = ({ id, data }) => {
       ) : (
         <>
           <AuthorInfo>
-            <Author>{author.data.login}</Author>
+            <Author>
+              <Link to={`/users/${authorId}`}>{author.data.login}</Link>
+            </Author>
             <Telegram>@{author.data.telegramLink}</Telegram>
           </AuthorInfo>
           <CreatedAt>{creationDate}</CreatedAt>

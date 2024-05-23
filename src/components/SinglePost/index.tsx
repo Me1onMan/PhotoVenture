@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import heartFilled from '@/../public/icons/heart-filled.svg';
 import heartOutlined from '@/../public/icons/heart-outlined.svg';
@@ -77,7 +78,9 @@ const SinglePost: FC<TProps> = ({ id, data }) => {
         ) : (
           <>
             <AuthotInfo>
-              <Author>{author.data.login}</Author>
+              <Author>
+                <Link to={`/users/${authorId}`}>{author.data.login}</Link>
+              </Author>
               <Telegram>@{author.data.telegramLink}</Telegram>
             </AuthotInfo>
             <CreatedAt>{creationDate}</CreatedAt>
