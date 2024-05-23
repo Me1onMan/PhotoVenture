@@ -91,7 +91,7 @@ const SingleGroup: FC<TProps> = ({ id, data }) => {
               <Title>{title}</Title>
               <Description>{description}</Description>
               {isAuthorLoading ? (
-                <h4>Loading author...</h4>
+                <h4>Загружаем...</h4>
               ) : (
                 <OwnerInfo>
                   <Link to={`/users/${ownerId}`}>
@@ -119,9 +119,9 @@ const SingleGroup: FC<TProps> = ({ id, data }) => {
             )}
           </BottomSection>
         </GroupCardContainer>
-        <PostsTitle>Posts</PostsTitle>
-        {isPostsLoading && <p>Loading posts...</p>}
-        {!isPostsLoading && posts.length === 0 && <p>No posts.</p>}
+        <PostsTitle>Публикации</PostsTitle>
+        {isPostsLoading && <p>Загружаем публикации...</p>}
+        {!isPostsLoading && posts.length === 0 && <p>Пока публикаций нет.</p>}
         <div>
           {!isPostsLoading &&
             posts.length > 0 &&

@@ -74,7 +74,7 @@ const SinglePost: FC<TProps> = ({ id, data }) => {
     <Container>
       <PostContainer>
         {isAuthorLoading ? (
-          <h4>Loading author...</h4>
+          <h4>Загружаем...</h4>
         ) : (
           <>
             <AuthotInfo>
@@ -96,7 +96,7 @@ const SinglePost: FC<TProps> = ({ id, data }) => {
             photos.map((photo) => <img key={photo} src={photo} alt="Post file" />)}
         </PhotosContainer>{' '}
         <Description>{description}</Description>
-        <Advices>Advices: {advices}</Advices>
+        <Advices>Советы: {advices}</Advices>
         <BottomSection>
           <LikeButton type="button" onClick={handleLike}>
             {isLikedByUser(userId, likedByIds) ? (
@@ -107,7 +107,7 @@ const SinglePost: FC<TProps> = ({ id, data }) => {
             {likedByIds.length}
           </LikeButton>
           <GeoCoordinates>{geoCoordinates}</GeoCoordinates>
-          <Access>{isLoadingGroup ? 'Грузим...' : groupName}</Access>
+          <Access>{isLoadingGroup ? 'Загружаем...' : groupName}</Access>
         </BottomSection>
       </PostContainer>
       <AddCommentForm postId={id} commentsId={commentsId} />
