@@ -1,28 +1,38 @@
 import styled from 'styled-components';
 
-export const ModalWrapper = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-
+export const ListContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
 
-  width: 100vw;
-  height: 100vh;
+  height: 260px;
+  overflow-y: scroll;
 
-  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 10px;
 `;
 
-export const ModalContainer = styled.div`
-  width: 70vw;
-  height: 80vh;
-
+export const UserContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
 
-  background-color: goldenrod;
+  width: 400px;
+
+  padding: 4px;
+`;
+
+export const Login = styled.p`
+  font-size: 16px;
+`;
+
+export const AddRemoveButton = styled.button`
+  padding: 4px 8px;
+
+  background-color: ${({ theme }) => theme.buttonPrimary};
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 16px;
+  color: ${({ theme }) => theme.buttonTextPrimary};
 `;

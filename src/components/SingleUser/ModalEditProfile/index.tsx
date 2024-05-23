@@ -11,7 +11,7 @@ import updateUserDB from '@/firebase/actions/updateUserDB';
 import usePhotoFromFirestore from '@/hooks/usePhotoFromFirestore';
 import { TFile } from '@/types';
 
-import { IconProfile, LabelEditProfile } from './styled';
+import { FormStyled, IconProfile, LabelEditProfile } from './styled';
 import { TModalEditProfileProps } from './types';
 
 const ModalEditProfile: FC<TModalEditProfileProps> = ({ userData }) => {
@@ -84,7 +84,7 @@ const ModalEditProfile: FC<TModalEditProfileProps> = ({ userData }) => {
     <>
       <LabelEditProfile>Edit profile</LabelEditProfile>
       {photoLink && <IconProfile src={photo} alt={login} />}
-      <form onSubmit={handleSubmit}>
+      <FormStyled onSubmit={handleSubmit}>
         <Input
           value={newLogin}
           setValue={setNewLogin}
@@ -122,7 +122,7 @@ const ModalEditProfile: FC<TModalEditProfileProps> = ({ userData }) => {
         />
         <FileInput file={newFile} setFile={setNewFile} />
         <Button type="submit">Update</Button>
-      </form>
+      </FormStyled>
     </>
   );
 };

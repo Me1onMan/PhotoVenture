@@ -7,6 +7,7 @@ import removeUserFromGroup from '@/firebase/actions/removeUserFromGroup';
 import useUsers from '@/hooks/useUsers';
 import searchUsers from '@/utils/searchUsers';
 
+import { AddRemoveButton, ListContainer, Login, UserContainer } from './styled';
 import { TModalAddMembersProps } from './types';
 
 const ModalAddMember: FC<TModalAddMembersProps> = ({ groupId, membersId }) => {
@@ -28,22 +29,23 @@ const ModalAddMember: FC<TModalAddMembersProps> = ({ groupId, membersId }) => {
 
   return (
     <>
-      <h1>Modal window!</h1>
       <Search
         value={searchValue}
         setValue={setSearchValue}
         name="usersSearch"
         placeholder="Search in users"
       />
-      {filteredUsers.length > 0 &&
-        filteredUsers.map((user) => (
-          <div key={user.id}>
-            <p>{user.data.login}</p>
-            <button type="button" onClick={handleAddRemoveClick(user.id)}>
-              {membersId.includes(user.id) ? 'Remove' : 'Add'}
-            </button>
-          </div>
-        ))}
+      <ListContainer>
+        {filteredUsers.length > 0 &&
+          filteredUsers.map((user) => (
+            <UserContainer key={user.id}>
+              <Login>{user.data.login}</Login>
+              <AddRemoveButton type="button" onClick={handleAddRemoveClick(user.id)}>
+                {membersId.includes(user.id) ? 'Remove' : 'Add'}
+              </AddRemoveButton>
+            </UserContainer>
+          ))}
+      </ListContainer>
     </>
   );
 };

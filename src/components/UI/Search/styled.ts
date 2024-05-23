@@ -16,6 +16,8 @@ export const Wrapper = styled.div`
 `;
 
 export const StyledSearch = styled.input`
+  background: transparent;
+
   outline: none;
   border: none;
 
