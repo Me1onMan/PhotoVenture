@@ -100,7 +100,11 @@ const Post: FC<TPostProps> = ({ id, data }) => {
           )}{' '}
           {likedByIds.length}
         </LikeButton>
-        <GeoCoordinates>{geoCoordinates}</GeoCoordinates>
+        <GeoCoordinates>
+          <Link to={`/map/${geoCoordinates[0]}/${geoCoordinates[1]}`} replace>
+            Показать на карте
+          </Link>
+        </GeoCoordinates>
         <Access>{isLoadingGroup ? 'Грузим...' : groupName}</Access>
       </BottomSection>
     </PostContainer>

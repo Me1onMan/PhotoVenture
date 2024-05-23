@@ -53,7 +53,9 @@ export const PhotosContainer = styled.div`
   gap: 10px;
 `;
 
-export const Photo = styled.img``;
+export const Photo = styled.img`
+  border-radius: 10px;
+`;
 
 export const Description = styled.p`
   margin: 12px 0;
@@ -64,6 +66,7 @@ export const Advices = styled.p``;
 export const BottomSection = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   margin-top: 8px;
 `;

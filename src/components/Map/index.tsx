@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
 
 import usePosts from '@/hooks/usePosts';
@@ -17,6 +18,8 @@ const MAP_CONTAINER_ID = 'map-container';
 
 const Map = () => {
   const posts = usePosts();
+  const { latitude, longitude } = useParams();
+  console.log(latitude, longitude);
 
   const [map, setMap] = useState();
   const [markers, setMarkers] = useState([]);
@@ -29,7 +32,7 @@ const Map = () => {
     mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
     const mapObj = new mapboxgl.Map({
       container: MAP_CONTAINER_ID,
-      center: [27.561824, 53.902287],
+      center: latitude && longitude ? [latitude, longitude] : [27.561824, 53.902287],
       zoom: 10,
       style: 'mapbox://styles/mapbox/streets-v11',
     });
@@ -57,10 +60,10 @@ const Map = () => {
       const markersObj = filteredPosts.map((post) => {
         const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
           `
-          <h1>
-            <a href=${POSTS_PAGE_ROUTE}/${post.id}>${post.data.title}</a>
-          </h1>
-          <p>${post.data.description}<p>
+            <h1>
+              <a href=${POSTS_PAGE_ROUTE}/${post.id}>${post.data.title}</a>
+            </h1>
+            <p>${post.data.description}<p>
           `,
         );
 

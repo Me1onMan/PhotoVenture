@@ -11,6 +11,7 @@ import {
   GROUPS_PAGE_ROUTE,
   LIKED_POSTS_PAGE_ROUTE,
   MAP_PAGE_ROUTE,
+  MAP_POST_PAGE_ROUTE,
   POSTS_PAGE_ROUTE,
   SINGLE_GROUP_ROUTE,
   SINGLE_POST_ROUTE,
@@ -50,6 +51,10 @@ const privateRoutes: Array<TRoute> = [
   },
   {
     path: MAP_PAGE_ROUTE,
+    element: MapPage,
+  },
+  {
+    path: MAP_POST_PAGE_ROUTE,
     element: MapPage,
   },
 ];

@@ -8,4 +8,5 @@ export const SINGLE_GROUP_ROUTE = `${GROUPS_PAGE_ROUTE}/:groupId`;
 export const USERS_PAGE_ROUTE = '/users';
 export const SINGLE_USER_ROUTE = `${USERS_PAGE_ROUTE}/:userId`;
 export const MAP_PAGE_ROUTE = '/map';
+export const MAP_POST_PAGE_ROUTE = '/map/:latitude/:longitude';
 export const NOT_FOUND_PAGE_ROUTE = '*';
