@@ -19,7 +19,6 @@ const MAP_CONTAINER_ID = 'map-container';
 const Map = () => {
   const posts = usePosts();
   const { latitude, longitude } = useParams();
-  console.log(latitude, longitude);
 
   const [map, setMap] = useState();
   const [markers, setMarkers] = useState([]);

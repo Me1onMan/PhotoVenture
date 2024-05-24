@@ -87,7 +87,7 @@ const AddPostForm: FC = () => {
         postType,
         advices,
         access,
-        geoCoordinates: [latitude, longitude],
+        geoCoordinates: [longitude, latitude],
         authorId,
       });
       clearForm();
