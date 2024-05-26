@@ -53,12 +53,12 @@ const SingleUser: FC<TProps> = ({ id, data }) => {
           <Telegram>@{telegramLink}</Telegram>
         </InfoContainer>
         <EditButtonContainer>
-          {id === currentUserId && <Button onClick={openModal}>Edit profile</Button>}
+          {id === currentUserId && <Button onClick={openModal}>Редактировать</Button>}
         </EditButtonContainer>
       </UserCardContainer>
-      <PostsTitle>Posts</PostsTitle>
-      {isPostsLoading && <p>Loading posts...</p>}
-      {!isPostsLoading && posts.length === 0 && <p>No posts.</p>}
+      <PostsTitle>Публикации</PostsTitle>
+      {isPostsLoading && <p>Грузим...</p>}
+      {!isPostsLoading && posts.length === 0 && <p>Пока что публикаций нет.</p>}
       {!isPostsLoading &&
         posts.length > 0 &&
         posts.map((post) => <Post key={post.id} id={post.id} data={post.data} />)}

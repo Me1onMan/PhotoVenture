@@ -34,7 +34,7 @@ const ModalAddMember: FC<TModalAddMembersProps> = ({ groupId, membersId }) => {
         value={searchValue}
         setValue={setSearchValue}
         name="usersSearch"
-        placeholder="Search in users"
+        placeholder="Искать пользователей"
       />
       <ListContainer>
         {filteredUsers.length > 0 &&
@@ -44,7 +44,7 @@ const ModalAddMember: FC<TModalAddMembersProps> = ({ groupId, membersId }) => {
                 <Login>{user.data.login}</Login>
               </Link>
               <AddRemoveButton type="button" onClick={handleAddRemoveClick(user.id)}>
-                {membersId.includes(user.id) ? 'Remove' : 'Add'}
+                {membersId.includes(user.id) ? 'Удалить' : 'Добавить'}
               </AddRemoveButton>
             </UserContainer>
           ))}

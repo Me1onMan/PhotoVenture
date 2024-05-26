@@ -82,46 +82,46 @@ const ModalEditProfile: FC<TModalEditProfileProps> = ({ userData }) => {
 
   return (
     <>
-      <LabelEditProfile>Edit profile</LabelEditProfile>
+      <LabelEditProfile>Редактирование профиля</LabelEditProfile>
       {photoLink && <IconProfile src={photo} alt={login} />}
       <FormStyled onSubmit={handleSubmit}>
         <Input
           value={newLogin}
           setValue={setNewLogin}
-          placeholder="Your login"
+          placeholder="Твой логин"
           name="login"
           type="text"
         />
         <Input
           value={newEmail}
           setValue={setNewEmail}
-          placeholder="Your email"
+          placeholder="Твоя почта"
           name="email"
           type="email"
         />
         <Input
           value={newTelegramLink}
           setValue={setNewTelegramLink}
-          placeholder="Your telegram login"
+          placeholder="Твоя ссылка Telegram"
           name="telegram"
           type="text"
         />
         <Input
           value={oldPassword}
           setValue={setOldPassword}
-          placeholder="Old password"
+          placeholder="Старый пароль"
           name="oldPassword"
           type="password"
         />
         <Input
           value={newPassword}
           setValue={setNewPassword}
-          placeholder="New password"
+          placeholder="Новый пароль"
           name="newPassword"
           type="password"
         />
         <FileInput file={newFile} setFile={setNewFile} />
-        <Button type="submit">Update</Button>
+        <Button type="submit">Сохранить</Button>
       </FormStyled>
     </>
   );

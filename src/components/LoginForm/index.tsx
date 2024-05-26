@@ -38,19 +38,19 @@ const LoginForm = () => {
 
   return (
     <LoginContainer>
-      <HeaderLogin>Login!</HeaderLogin>
+      <HeaderLogin>Авторизация</HeaderLogin>
       <FormStyled onSubmit={handleSubmit}>
-        <Input value={login} setValue={setLogin} name="login" placeholder="Login" type="text" />
+        <Input value={login} setValue={setLogin} name="login" placeholder="Логин" type="text" />
         <Input
           value={password}
           setValue={setPassword}
           name="password"
-          placeholder="Password"
+          placeholder="Пароль"
           type="password"
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit">Войти</Button>
       </FormStyled>
-      <NavLink to={REGISTRATION_PAGE_ROUTE}>To registration page</NavLink>
+      <NavLink to={REGISTRATION_PAGE_ROUTE}>Зарегистрироваться</NavLink>
     </LoginContainer>
   );
 };

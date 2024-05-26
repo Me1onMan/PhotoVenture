@@ -39,27 +39,27 @@ const RegisterForm = () => {
 
   return (
     <Container>
-      <RegisterHeader>Registration!</RegisterHeader>
+      <RegisterHeader>Регистрация</RegisterHeader>
       <FormStyled onSubmit={handleSubmit}>
-        <Input value={login} setValue={setLogin} name="login" placeholder="Login" type="text" />
-        <Input value={email} setValue={setEmail} name="email" placeholder="Email" type="email" />
+        <Input value={login} setValue={setLogin} name="login" placeholder="Логин" type="text" />
+        <Input value={email} setValue={setEmail} name="email" placeholder="Почта" type="email" />
         <Input
           value={telegramLink}
           setValue={setTelegramLink}
           name="telegramLink"
-          placeholder="Telegram link"
+          placeholder="Ссылка Telegram"
           type="text"
         />
         <Input
           value={password}
           setValue={setPassword}
           name="password"
-          placeholder="Password"
+          placeholder="Пароль"
           type="password"
         />
-        <Button type="submit">Register</Button>
+        <Button type="submit">Зарегистрироваться</Button>
       </FormStyled>
-      <NavLink to={LOGIN_PAGE_ROUTE}>To login page</NavLink>
+      <NavLink to={LOGIN_PAGE_ROUTE}>У меня уже есть аккаунт</NavLink>
     </Container>
   );
 };

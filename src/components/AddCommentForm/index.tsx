@@ -17,6 +17,7 @@ const AddCommentForm: FC<TProps> = ({ postId, commentsId }) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await addCommentToPost(postId, commentsId, comment, authorId);
+    setComment('');
   };
 
   return (
